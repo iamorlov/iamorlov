@@ -64,19 +64,23 @@ export default function Home() {
           },
           background: {
             color: {
-              value: "#050114", // Dark deep space with hint of purple
+              value: "#0a0a10", // Very dark blue-gray
             },
+            image: "radial-gradient(ellipse at 25% 45%, rgba(16,13,25,0.8) 0%, rgba(10,10,16,1) 50%, rgba(8,8,12,1) 100%)",
+            position: "center",
+            repeat: "no-repeat",
+            size: "cover"
           },
-          fpsLimit: 120,
+          fpsLimit: 60,
           interactivity: {
             events: {
               onHover: {
                 enable: true,
-                mode: "none", // Changed from "grab" to "none" to remove connection lines
+                mode: "none",
                 parallax: {
-                  enable: true, // Keep parallax effect
-                  force: 50,
-                  smooth: 20
+                  enable: true,
+                  force: 40,
+                  smooth: 30
                 }
               },
               onClick: {
@@ -92,26 +96,68 @@ export default function Home() {
             },
           },
           particles: {
-            color: {
-              value: ["#ffffff", "#a78bfa", "#c4b5fd", "#ddd6fe", "#f5f3ff"],
-            },
-            links: {
-              enable: false,
-              distance: 150,
-              color: "#8855dd",
-              opacity: 0.1,
-              width: 1
+            // Create galactic structure
+            groups: {
+              // Core stars (center of galaxy)
+              core: {
+                number: { value: 70 },
+                size: { value: { min: 0.8, max: 3 } },
+                move: { speed: 0.1 },
+                opacity: { value: { min: 0.5, max: 1 } },
+                color: { value: ["#ffffff", "#f0f0ff", "#e0e0ff", "#a090ff", "#8080ff", "#fafafa"] },
+                zIndex: { value: 1 },
+                position: { x: 45, y: 45 }
+              },
+              // Spiral arm 1
+              arm1: {
+                number: { value: 150 },
+                size: { value: { min: 0.1, max: 1.5 } },
+                move: { speed: 0.1, spin: { enable: true, acceleration: -0.02 } },
+                opacity: { value: { min: 0.05, max: 0.7 } },
+                color: { value: ["#ffffff", "#dcddff", "#aaadd3", "#6a70bc", "#5060ff"] },
+                zIndex: { value: 0 },
+                position: { x: 40, y: 40 }
+              },
+              // Spiral arm 2
+              arm2: {
+                number: { value: 150 },
+                size: { value: { min: 0.1, max: 1.5 } },
+                move: { speed: 0.12, spin: { enable: true, acceleration: -0.02 } },
+                opacity: { value: { min: 0.05, max: 0.7 } },
+                color: { value: ["#ffffff", "#e0e0ff", "#c0c0ff", "#9580dd", "#6060a0"] },
+                zIndex: { value: 0 },
+                position: { x: 50, y: 50 }
+              },
+              // Background stars
+              background: {
+                number: { value: 200 },
+                size: { value: { min: 0.1, max: 1 } },
+                move: { speed: 0.05 },
+                opacity: { value: { min: 0.02, max: 0.3 } },
+                color: { value: ["#ffffff", "#dddddd", "#aaaaaa", "#a0a0c0", "#8080a0"] },
+                zIndex: { value: -1 }
+              },
+              // Distant dust clouds
+              dust: {
+                number: { value: 30 },
+                size: { value: { min: 15, max: 40 } },
+                move: { speed: 0.03 },
+                opacity: { value: { min: 0.01, max: 0.05 } },
+                color: { value: ["#483d8b", "#3b2f8a", "#2a1f60", "#1f0f40", "#4b0082"] },
+                zIndex: { value: -2 },
+                shape: { type: "circle" }
+              }
             },
             move: {
               enable: true,
-              speed: 0.2,
+              speed: 0.15,
               direction: "none",
               random: true,
               straight: false,
               outMode: "out",
               attract: {
                 enable: true,
-                rotateX: 1200,
+                rotateX: 600,
                 rotateY: 1200,
               },
             },
@@ -120,40 +166,118 @@ export default function Home() {
                 enable: true,
                 area: 1000,
               },
-              value: 180,
+              value: 600, // Total stars
             },
             opacity: {
-              value: { min: 0.05, max: 0.8 },
+              value: { min: 0.05, max: 1 },
               random: true,
-              anim: {
+              animation: {
                 enable: true,
                 speed: 0.1,
-                opacity_min: 0,
+                minimumValue: 0.05,
                 sync: false,
               },
             },
-            shape: {
-              type: "circle",
-            },
             size: {
-              value: { min: 0.5, max: 3 },
+              value: { min: 0.1, max: 3 },
               random: true,
+              animation: {
+                enable: true,
+                speed: 0.5,
+                minimumValue: 0.1,
+                sync: false
+              }
             },
             twinkle: {
               particles: {
                 enable: true,
-                frequency: 0.02,
+                frequency: 0.03,
                 opacity: 0.8,
+                color: {
+                  value: ["#ffffff", "#f5f3ff", "#8080ff"],
+                }
               },
-              lines: {
-                enable: false,
+            },
+            shadow: {
+              enable: true,
+              color: {
+                value: "#6050dd"
+              },
+              blur: 6,
+              offset: {
+                x: 0,
+                y: 0
               }
             },
+            // Create visual depth with z-index variations
+            zIndex: {
+              value: { min: -2, max: 2 },
+              random: true,
+              opacityRate: 0.5,
+              sizeRate: 1.2,
+              velocityRate: 1.3
+            }
           },
           preset: "stars",
           detectRetina: true,
+          // Add dust nebula effect with very subtle blue-purple
+          backgroundMask: {
+            enable: true,
+            cover: {
+              color: {
+                value: {
+                  r: 15,
+                  g: 10,
+                  b: 30
+                }
+              },
+              opacity: 0.05
+            }
+          },
+          // Add special shooting stars
+          emitters: [
+            {
+              direction: "bottom-right",
+              rate: {
+                delay: 20, // One shooting star every 20 seconds
+                quantity: 1
+              },
+              position: {
+                x: 0,
+                y: 0
+              },
+              size: {
+                width: 100,
+                height: 0
+              },
+              particles: {
+                shape: {
+                  type: "line"
+                },
+                size: {
+                  value: { min: 1, max: 2 }
+                },
+                move: {
+                  straight: true,
+                  speed: 10
+                },
+                opacity: {
+                  value: 0.7
+                },
+                color: {
+                  value: "#ffffff"
+                },
+                life: {
+                  duration: {
+                    value: 1
+                  }
+                }
+              }
+            }
+          ]
         }}
       />
+
       {/* Header */}
       <main className="flex w-full flex-1 flex-col items-center justify-center px-4 py-16 md:px-20">
         <div className="relative w-full max-w-7xl">
