@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import { loadSlim } from "tsparticles-slim";
 import Particles from "react-tsparticles";
 import { Engine } from "tsparticles-engine";
+import { loadAbsorbersPlugin } from "tsparticles-plugin-absorbers";
 
 // Social icon component
 const IconLink: FC<{ href: string; icon: string; label: string }> = ({
@@ -48,6 +49,7 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
 export default function Home() {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
+    await loadAbsorbersPlugin(engine);
   }, []);
 
   return (
@@ -62,7 +64,7 @@ export default function Home() {
           },
           background: {
             color: {
-              value: "#0a0a0a",
+              value: "#050114", // Dark deep space with hint of purple
             },
           },
           fpsLimit: 120,
@@ -70,7 +72,12 @@ export default function Home() {
             events: {
               onHover: {
                 enable: true,
-                mode: "grab",
+                mode: "none", // Changed from "grab" to "none" to remove connection lines
+                parallax: {
+                  enable: true, // Keep parallax effect
+                  force: 50,
+                  smooth: 20
+                }
               },
               onClick: {
                 enable: true,
@@ -79,80 +86,71 @@ export default function Home() {
               resize: true,
             },
             modes: {
-              grab: {
-                distance: 140,
-                links: {
-                  opacity: 0.5,
-                  color: "#8855dd",
-                },
-              },
-              bubble: {
-                distance: 200,
-                size: 4,
-                duration: 2,
-                opacity: 0.8,
-              },
-              repulse: {
-                distance: 200,
-                duration: 0.4,
-              },
               push: {
                 quantity: 4,
               },
             },
-            detectsOn: "window",
           },
           particles: {
             color: {
-              value: "#8855dd", // Brighter purple color
+              value: ["#ffffff", "#a78bfa", "#c4b5fd", "#ddd6fe", "#f5f3ff"],
             },
             links: {
-              enable: true,
-              distance: 120,
+              enable: false,
+              distance: 150,
               color: "#8855dd",
-              opacity: 0.3,
-              width: 1,
+              opacity: 0.1,
+              width: 1
             },
             move: {
               enable: true,
-              speed: 0.5, // Slightly faster
+              speed: 0.2,
               direction: "none",
               random: true,
               straight: false,
-              outModes: "out",
+              outMode: "out",
               attract: {
                 enable: true,
-                rotateX: 600,
+                rotateX: 1200,
                 rotateY: 1200,
               },
             },
             number: {
               density: {
                 enable: true,
-                area: 800,
+                area: 1000,
               },
-              value: 80, // Reduced for better performance with links
+              value: 180,
             },
             opacity: {
-              value: 0.4, // Higher base opacity
+              value: { min: 0.05, max: 0.8 },
               random: true,
-              animation: {
+              anim: {
                 enable: true,
-                speed: 0.2,
-                minimumValue: 0.1,
-                sync: false
-              }
+                speed: 0.1,
+                opacity_min: 0,
+                sync: false,
+              },
+            },
+            shape: {
+              type: "circle",
             },
             size: {
-              value: 2, // Larger size
+              value: { min: 0.5, max: 3 },
               random: true,
             },
-            shadow: {
-              enable: true,
-              color: "#8855dd",
-              blur: 5
-            }
+            twinkle: {
+              particles: {
+                enable: true,
+                frequency: 0.02,
+                opacity: 0.8,
+              },
+              lines: {
+                enable: false,
+              }
+            },
           },
+          preset: "stars",
           detectRetina: true,
         }}
       />
@@ -160,7 +158,7 @@ export default function Home() {
       <main className="flex w-full flex-1 flex-col items-center justify-center px-4 py-16 md:px-20">
         <div className="relative w-full max-w-7xl">
           <h1 className="text-center font-sans tracking-tighter text-6xl sm:text-8xl md:text-9xl lg:text-[12rem] bg-gradient-to-b from-white to-zinc-600 bg-clip-text text-transparent transition-all duration-500">
-            VADYM<br/>ORLOV
+            VADYM<br />ORLOV
           </h1>
 
           <div className="mt-8 flex justify-center">
