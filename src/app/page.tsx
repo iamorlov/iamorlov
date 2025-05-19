@@ -69,7 +69,7 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
 // Updated WordCarousel component with h1-matching styles
 const WordCarousel: FC = () => {
   const words = [
-    "DEVELOPER",
+    "DEV",
     "CREATOR",
     "DREAMER",
     "CURIOUS",
@@ -78,9 +78,9 @@ const WordCarousel: FC = () => {
     "INNOVATIVE",
     "ORLOV",
   ];
-  
+
   const [index, setIndex] = useState(0);
-  
+
   useEffect(() => {
     // Only advance if we're not at the last word
     if (index < words.length - 1) {
@@ -90,11 +90,11 @@ const WordCarousel: FC = () => {
           return prevIndex < words.length - 1 ? prevIndex + 1 : prevIndex;
         });
       }, 1000);
-      
+
       return () => clearInterval(intervalId);
     }
   }, [index, words.length]);
-  
+
   return (
     <div className="h-32 sm:h-40 md:h-48 lg:h-56 flex items-center overflow-hidden">
       <div className="relative">
@@ -104,8 +104,8 @@ const WordCarousel: FC = () => {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -50, opacity: 0 }}
-            transition={{ 
-              type: "spring", 
+            transition={{
+              type: "spring",
               stiffness: 700,
               damping: 35,
               mass: 0.6,
@@ -121,14 +121,67 @@ const WordCarousel: FC = () => {
   );
 };
 
+// Update your Home component with whole-word animation
 export default function Home() {
+  const [headingText, setHeadingText] = useState("I AM");
+
+  // Set up the text change with delay
+  useEffect(() => {
+    // Wait 7 seconds, then change the text to VADYM
+    const timer = setTimeout(() => {
+      setHeadingText("VADYM");
+    }, 7000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Animation variants for the whole heading
+  const headingVariants = {
+    initial: {
+      opacity: 0,
+      y: 30,
+      rotateX: 40,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        type: "spring",
+        stiffness: 500,
+        damping: 30,
+        duration: 0.7,
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -30,
+      rotateX: -40,
+      transition: {
+        duration: 0.4,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
-    <div className="flex min-h-screen flex-col text-white relative overflow-hidden bg-[#0a0a0a]">
+    <div className="flex min-h-screen flex-col text-white relative overflow-hidden">
       <main className="relative z-10 flex flex-1 flex-col">
         <div className="flex flex-col md:flex-row flex-1 items-center justify-center p-4 md:p-10 lg:p-16">
           <div className="w-full md:w-1/2 flex justify-center md:justify-end pr-0 md:pr-8 mb-8 md:mb-0">
-            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter text-right title-font">
-              I AM
+            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter text-right" style={{ perspective: "1000px" }}>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={headingText}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={headingVariants}
+                  style={{ display: "inline-block", transformOrigin: "center" }}
+                >
+                  {headingText}
+                </motion.span>
+              </AnimatePresence>
             </h1>
           </div>
 
