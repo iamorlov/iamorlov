@@ -5,15 +5,17 @@ import ClientBackground from "./ClientBackground";
 
 export default function DelayedBackground() {
   const [showBackground, setShowBackground] = useState(false);
-  const [startAnimation, setStartAnimation] = useState(false);
+  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
-    // First delay - wait 6 seconds before starting to show background
+    // First delay - wait 7 seconds before starting to show background
     const showTimer = setTimeout(() => {
       setShowBackground(true);
       
-      // Start animation immediately after setting showBackground
-      setStartAnimation(true);
+      // Add a small delay to ensure the element is in the DOM before animating
+      setTimeout(() => {
+        setOpacity(1);
+      }, 50);
     }, 7000);
 
     return () => {
@@ -25,10 +27,8 @@ export default function DelayedBackground() {
 
   return (
     <div 
-      className="transition-opacity duration-1000 ease-in-out"
-      style={{ 
-        opacity: startAnimation ? 1 : 0 
-      }}
+      className="transition-all duration-1000 ease-in-out"
+      style={{ opacity }}
     >
       <ClientBackground />
     </div>

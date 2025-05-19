@@ -97,7 +97,7 @@ const WordCarousel: FC = () => {
 
   return (
     <div className="h-32 sm:h-40 md:h-48 lg:h-56 flex items-center overflow-hidden">
-      <div className="relative">
+      <div className="relative w-full">
         <AnimatePresence mode="wait">
           <motion.span
             key={words[index]}
@@ -111,7 +111,7 @@ const WordCarousel: FC = () => {
               mass: 0.6,
               duration: 0.4
             }}
-            className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter block title-font"
+            className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter block title-font main-text"
           >
             {words[index]}
           </motion.span>
@@ -130,7 +130,7 @@ export default function Home() {
     // Wait 7 seconds, then change the text to VADYM
     const timer = setTimeout(() => {
       setHeadingText("VADYM");
-    }, 7000);
+    }, 8500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -169,7 +169,7 @@ export default function Home() {
       <main className="relative z-10 flex flex-1 flex-col">
         <div className="flex flex-col md:flex-row flex-1 items-center justify-center p-4 md:p-10 lg:p-16">
           <div className="w-full md:w-1/2 flex justify-center md:justify-end pr-0 md:pr-8 mb-8 md:mb-0">
-            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter text-right" style={{ perspective: "1000px" }}>
+            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter text-right main-text" style={{ perspective: "1000px" }}>
               <AnimatePresence mode="wait">
                 <motion.span
                   key={headingText}

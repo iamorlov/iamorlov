@@ -41,3 +41,9 @@ h1 span {
   color: transparent;
   letter-spacing: .025em;
 }
+
+@media (max-width: 768px) {
+  .main-text {
+    text-align: center;
+  }
+}
