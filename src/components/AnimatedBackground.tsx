@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const DotBackground = () => {
+const AnimatedBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -177,4 +177,4 @@ const DotBackground = () => {
   );
 };
 
-export default DotBackground;
+export default AnimatedBackground;

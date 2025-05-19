@@ -89,7 +89,7 @@ const WordCarousel: FC = () => {
           // If we're at the second-to-last word, this will go to the last word and stop
           return prevIndex < words.length - 1 ? prevIndex + 1 : prevIndex;
         });
-      }, 1000);
+      }, 700);
 
       return () => clearInterval(intervalId);
     }
@@ -130,7 +130,7 @@ export default function Home() {
     // Wait 7 seconds, then change the text to VADYM
     const timer = setTimeout(() => {
       setHeadingText("VADYM");
-    }, 8500);
+    }, 6000);
 
     return () => clearTimeout(timer);
   }, []);

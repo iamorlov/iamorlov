@@ -16,7 +16,7 @@ export default function DelayedBackground() {
       setTimeout(() => {
         setOpacity(1);
       }, 50);
-    }, 7000);
+    }, 6000);
 
     return () => {
       clearTimeout(showTimer);
