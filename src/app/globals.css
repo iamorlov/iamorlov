@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -28,16 +29,17 @@ body {
 }
 
 h1 {
-  font-size: 12vw;
-  text-align: center;
   width: 100%;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: 0.025em;
   margin: 0;
   padding: 0;
   background: linear-gradient(to right, #a67bff, #7c4dff, #7e57c2);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: var(--font-lexend);
+}
+
+.title-font {
+  font-family: var(--font-dm-sans);
 }
