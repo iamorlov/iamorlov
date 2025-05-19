@@ -69,24 +69,22 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
 // Updated WordCarousel component with h1-matching styles
 const WordCarousel: FC = () => {
   const words = [
-    "DEV",
+    "DEVELOPER",
     "CREATOR",
     "DREAMER",
     "CURIOUS",
-    "PASSIONATE",
     "DETERMINED",
     "INNOVATIVE",
+    "UKRAINIAN",
     "ORLOV",
   ];
 
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    // Only advance if we're not at the last word
     if (index < words.length - 1) {
       const intervalId = setInterval(() => {
         setIndex(prevIndex => {
-          // If we're at the second-to-last word, this will go to the last word and stop
           return prevIndex < words.length - 1 ? prevIndex + 1 : prevIndex;
         });
       }, 700);
@@ -121,21 +119,25 @@ const WordCarousel: FC = () => {
   );
 };
 
-// Update your Home component with whole-word animation
 export default function Home() {
   const [headingText, setHeadingText] = useState("I AM");
+  const [equalLayout, setEqualLayout] = useState(false);
 
-  // Set up the text change with delay
   useEffect(() => {
-    // Wait 7 seconds, then change the text to VADYM
-    const timer = setTimeout(() => {
+    const textTimer = setTimeout(() => {
       setHeadingText("VADYM");
     }, 6000);
 
-    return () => clearTimeout(timer);
+    const layoutTimer = setTimeout(() => {
+      setEqualLayout(true);
+    }, 6000);
+
+    return () => {
+      clearTimeout(textTimer);
+      clearTimeout(layoutTimer);
+    };
   }, []);
 
-  // Animation variants for the whole heading
   const headingVariants = {
     initial: {
       opacity: 0,
@@ -168,7 +170,9 @@ export default function Home() {
     <div className="flex min-h-screen flex-col text-white relative overflow-hidden">
       <main className="relative z-10 flex flex-1 flex-col">
         <div className="flex flex-col md:flex-row flex-1 items-center justify-center p-4 md:p-10 lg:p-16">
-          <div className="w-full md:w-1/2 flex justify-center md:justify-end pr-0 md:pr-8 mb-8 md:mb-0">
+          <div
+            className={`w-full ${equalLayout ? 'md:w-1/2' : 'md:w-1/3'} flex justify-center md:justify-end pr-0 md:pr-8 mb-8 md:mb-0 transition-all duration-1000 ease-in-out`}
+          >
             <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter text-right main-text" style={{ perspective: "1000px" }}>
               <AnimatePresence mode="wait">
                 <motion.span
@@ -185,7 +189,9 @@ export default function Home() {
             </h1>
           </div>
 
-          <div className="w-full md:w-1/2 flex flex-col justify-center pl-0 md:pl-8">
+          <div
+            className={`w-full ${equalLayout ? 'md:w-1/2' : 'md:w-2/3'} flex flex-col justify-center pl-0 md:pl-8 transition-all duration-1000 ease-in-out`}
+          >
             <WordCarousel />
           </div>
         </div>
