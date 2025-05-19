@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import ClientBackground from "@/components/ClientBackground";
+import DelayedBackground from "@/components/DelayedBackground";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSans.variable} antialiased`}>
-        <ClientBackground />
+        <DelayedBackground />
         {children}
       </body>
     </html>
