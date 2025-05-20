@@ -60,7 +60,7 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
         </svg>
       )}
     </div>
-    <span className="text-xs font-medium text-zinc-400 transition-colors group-hover:text-zinc-300">
+    <span className="text-xs font-medium text-zinc-400 transition-colors group-hover:text-zinc-300 links-text">
       {label}
     </span>
   </a>
@@ -197,7 +197,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="w-full border-t border-zinc-800 bg-zinc-900/50 backdrop-blur-sm relative z-10">
+      <footer className="w-full border-t border-zinc-800 bg-zinc-900/50 relative z-10">
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-8 px-6 py-10">
           <IconLink
             href="https://github.com/iamorlov"

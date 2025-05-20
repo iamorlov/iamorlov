@@ -1,10 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 const AnimatedBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [opacity, setOpacity] = useState(0);
+  
+  useEffect(() => {
+    // Start fade-in after a short delay to ensure DOM is ready
+    const fadeTimer = setTimeout(() => {
+      setOpacity(1);
+    }, 100);
+    
+    return () => clearTimeout(fadeTimer);
+  }, []);
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -171,7 +181,8 @@ const AnimatedBackground = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 -z-10 bg-[#0a0a0a]"
+      className="fixed inset-0 -z-10 bg-[#0a0a0a] transition-opacity duration-1000 ease-in-out"
+      style={{ opacity }}
       aria-hidden="true"
     />
   );

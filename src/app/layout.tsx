@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Outfit } from "next/font/google";
 import "./globals.css";
-import DelayedBackground from "@/components/DelayedBackground";
+import ClientBackground from "@/components/ClientBackground";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "500", "700", "900"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
   weight: ["300", "500", "700", "900"],
@@ -22,8 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} antialiased`}>
-        <DelayedBackground />
+      <body className={`${dmSans.variable} ${outfit.variable} antialiased`}>
+        <ClientBackground />
         {children}
       </body>
     </html>
