@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Outfit } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import ClientBackground from "@/components/ClientBackground";
 
 const dmSans = DM_Sans({

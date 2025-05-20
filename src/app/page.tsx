@@ -94,7 +94,7 @@ const WordCarousel: FC = () => {
   }, [index, words.length]);
 
   return (
-    <div className="h-32 sm:h-40 md:h-48 lg:h-56 flex items-center overflow-hidden">
+    <div className="flex items-center overflow-hidden">
       <div className="relative w-full">
         <AnimatePresence mode="wait">
           <motion.span
@@ -109,7 +109,7 @@ const WordCarousel: FC = () => {
               mass: 0.6,
               duration: 0.4
             }}
-            className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter block title-font main-text"
+            className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter block title-font main-text iamtitle"
           >
             {words[index]}
           </motion.span>
@@ -171,22 +171,25 @@ export default function Home() {
       <main className="relative z-10 flex flex-1 flex-col">
         <div className="flex flex-col md:flex-row flex-1 items-center justify-center p-4 md:p-10 lg:p-16">
           <div
-            className={`w-full ${equalLayout ? 'md:w-1/2' : 'md:w-1/3'} flex justify-center md:justify-end pr-0 md:pr-8 mb-8 md:mb-0 transition-all duration-1000 ease-in-out`}
+            className={`w-full ${equalLayout ? 'md:w-1/2' : 'md:w-1/3'} flex justify-center md:justify-end pr-0 md:pr-8 md:mb-0 transition-all duration-1000 ease-in-out`}
           >
-            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter text-right main-text" style={{ perspective: "1000px" }}>
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={headingText}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={headingVariants}
-                  style={{ display: "inline-block", transformOrigin: "center" }}
-                >
-                  {headingText}
-                </motion.span>
-              </AnimatePresence>
-            </h1>
+            <div className="iamtitle-container">
+              <h1 className="font-bold text-white tracking-tighter text-right main-text iamtitle" 
+                  style={{ perspective: "1000px" }}>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={headingText}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={headingVariants}
+                    style={{ display: "inline-block", transformOrigin: "center" }}
+                  >
+                    {headingText}
+                  </motion.span>
+                </AnimatePresence>
+              </h1>
+            </div>
           </div>
 
           <div
