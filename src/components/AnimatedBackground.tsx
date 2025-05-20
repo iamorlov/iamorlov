@@ -17,7 +17,9 @@ const AnimatedBackground = () => {
   }, []);
   
   useEffect(() => {
-    if (!containerRef.current) return;
+    // Store a reference to the current container element
+    const container = containerRef.current;
+    if (!container) return;
     
     // Setup scene
     const scene = new THREE.Scene();
@@ -39,7 +41,7 @@ const AnimatedBackground = () => {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    containerRef.current.appendChild(renderer.domElement);
+    container.appendChild(renderer.domElement);
     
     // Create a circle texture for perfectly round dots
     const dotTexture = createCircleTexture();
@@ -129,8 +131,8 @@ const AnimatedBackground = () => {
     
     // Clean up
     return () => {
-      if (containerRef.current?.contains(renderer.domElement)) {
-        containerRef.current.removeChild(renderer.domElement);
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
       }
       
       window.removeEventListener("mousemove", handleMouseMove);
