@@ -2,7 +2,6 @@
 
 import { FC, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-// import Link from "next/link";
 
 // Social icon component
 const IconLink: FC<{ href: string; icon: string; label: string }> = ({
@@ -217,16 +216,6 @@ export default function Home() {
             icon="mail"
             label="Email"
           />
-          {/* <Link href="/chat" className="group flex flex-col items-center gap-2 transition-all duration-300 hover:scale-110">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 p-3 text-zinc-400 transition-colors group-hover:bg-zinc-700 group-hover:text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </div>
-            <span className="text-xs font-medium text-zinc-400 transition-colors group-hover:text-zinc-300 links-text">
-              Chat
-            </span>
-          </Link> */}
         </div>
       </footer>
     </div>
