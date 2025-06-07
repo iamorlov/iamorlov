@@ -13,10 +13,10 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="group flex flex-col items-center gap-2 transition-all duration-300 hover:scale-110"
+    className="group flex flex-col items-center gap-2 transition-all duration-300 hover:scale-105"
     aria-label={label}
   >
-    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 p-3 text-zinc-400 transition-colors group-hover:bg-zinc-700 group-hover:text-white">
+    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 p-3 text-zinc-400 transition-colors group-hover:bg-zinc-800 group-hover:text-white">
       {icon === "github" && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +199,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="w-full border-t border-zinc-800 bg-black/50 relative z-10">
+      <footer className="w-full bg-black/50 relative z-10">
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-8 px-6 py-10">
           <IconLink
             href="https://github.com/iamorlov"

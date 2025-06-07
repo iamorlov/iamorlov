@@ -18,7 +18,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "iamorlov",
+  title: "Vadym Orlov",
   description: "Vadym Orlov | Official web site",
 };
 
