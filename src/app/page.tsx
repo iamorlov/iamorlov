@@ -78,24 +78,38 @@ export default function Home() {
     }
   };
 
-  const lineVariants = {
+  const vadymVariants = {
     hidden: { 
       opacity: 0, 
-      y: 60,
-      rotateX: 45,
-      scale: 0.8
+      y: -40,
     },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
-      scale: 1,
       transition: {
         type: "spring",
-        stiffness: 120,
-        damping: 15,
-        mass: 1,
-        duration: 1.2
+        stiffness: 100,
+        damping: 20,
+        duration: 1.0,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const orlovVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 40,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+        duration: 1.0,
+        ease: "easeOut"
       }
     }
   };
@@ -104,31 +118,31 @@ export default function Home() {
     <div className="flex min-h-screen flex-col relative overflow-hidden">
       <main className="relative z-10 flex flex-1 flex-col justify-center items-center p-4">
         <motion.div
-          className="flex flex-col justify-center h-[60vh] w-full max-w-[1920px]"
+          className="flex flex-col justify-center h-[60vh] w-full max-w-[1920px] px-4"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           style={{ perspective: "1000px" }}
         >
           <motion.h1 
-            className="font-black leading-[0.85] tracking-tighter text-left text-white"
+            className="font-black leading-[0.85] tracking-tighter text-left text-[#e9edc9]"
             style={{ 
               fontSize: "clamp(4rem, 13vw, 16rem)",
               transformStyle: "preserve-3d",
               fontFamily: "var(--font-dm-sans)"
             }}
-            variants={lineVariants}
+            variants={vadymVariants}
           >
             VADYM
           </motion.h1>
           <motion.h1 
-            className="font-black leading-[0.85] tracking-tighter text-right text-[#55679C]"
+            className="font-black leading-[0.85] tracking-tighter text-right text-[#384B70]"
             style={{ 
               fontSize: "clamp(4rem, 13vw, 16rem)",
               transformStyle: "preserve-3d",
               fontFamily: "var(--font-dm-sans)"
             }}
-            variants={lineVariants}
+            variants={orlovVariants}
           >
             ORLOV
           </motion.h1>
