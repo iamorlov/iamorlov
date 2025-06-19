@@ -22,7 +22,7 @@ const AnimatedBackground = () => {
       <motion.div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #223843 0%,rgb(46, 76, 92) 50%,rgb(20, 39, 48) 100%)"
+          background: "#405D72"
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: isVisible ? 1 : 0 }}
@@ -33,7 +33,7 @@ const AnimatedBackground = () => {
       <motion.div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #eff1f3 0%,rgb(224, 226, 228) 50%,rgb(237, 244, 250) 100%)",
+          background: "#F7E7DC",
           clipPath: `polygon(${50 - angleOffset/2}% 0%, 100% 0%, 100% 100%, ${50 + angleOffset/2}% 100%)`,
         }}
         initial={{ x: "100%" }}

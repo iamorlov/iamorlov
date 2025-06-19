@@ -113,7 +113,7 @@ export default function Home() {
           <motion.h1 
             className="font-black leading-[0.85] tracking-tighter text-left text-white"
             style={{ 
-              fontSize: "clamp(3rem, 12vw, 16rem)",
+              fontSize: "clamp(4rem, 13vw, 16rem)",
               transformStyle: "preserve-3d",
               fontFamily: "var(--font-dm-sans)"
             }}
@@ -122,9 +122,9 @@ export default function Home() {
             VADYM
           </motion.h1>
           <motion.h1 
-            className="font-black leading-[0.85] tracking-tighter text-right text-[#274c77]"
+            className="font-black leading-[0.85] tracking-tighter text-right text-[#55679C]"
             style={{ 
-              fontSize: "clamp(3rem, 12vw, 16rem)",
+              fontSize: "clamp(4rem, 13vw, 16rem)",
               transformStyle: "preserve-3d",
               fontFamily: "var(--font-dm-sans)"
             }}
@@ -135,7 +135,7 @@ export default function Home() {
         </motion.div>
       </main>
 
-      <footer className="w-full relative z-10 flex justify-center md:justify-end">
+      <footer className="w-full relative z-10 flex justify-center md:justify-start">
         <div className="flex flex-wrap items-center justify-center gap-8 px-6 py-10 w-full md:w-1/2">
           <IconLink
             href="https://github.com/iamorlov"
