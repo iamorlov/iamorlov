@@ -1,7 +1,7 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { FC } from "react";
+import { motion } from "framer-motion";
 
 // Social icon component
 const IconLink: FC<{ href: string; icon: string; label: string }> = ({
@@ -16,7 +16,7 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
     className="group flex flex-col items-center gap-2 transition-all duration-300 hover:scale-105"
     aria-label={label}
   >
-    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 p-3 text-zinc-400 transition-colors group-hover:bg-zinc-800 group-hover:text-white">
+    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm p-3 text-white/80 transition-all group-hover:bg-white/30 group-hover:text-white">
       {icon === "github" && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,147 +60,83 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
         </svg>
       )}
     </div>
-    <span className="text-xs font-medium text-zinc-400 transition-colors group-hover:text-zinc-300 links-text">
+    <span className="text-xs font-medium text-white/70 transition-colors group-hover:text-white links-text">
       {label}
     </span>
   </a>
 );
 
-const WordCarousel: FC = () => {
-  const words = [
-    "DEVELOPER",
-    "CREATOR",
-    "DREAMER",
-    "CURIOUS",
-    "DETERMINED",
-    "INNOVATIVE",
-    "UKRAINIAN",
-    "ORLOV",
-  ];
-
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (index < words.length - 1) {
-      const intervalId = setInterval(() => {
-        setIndex(prevIndex => {
-          return prevIndex < words.length - 1 ? prevIndex + 1 : prevIndex;
-        });
-      }, 700);
-
-      return () => clearInterval(intervalId);
-    }
-  }, [index, words.length]);
-
-  return (
-    <div className="flex items-center overflow-hidden">
-      <div className="relative w-full">
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={words[index]}
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 50, opacity: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 700,
-              damping: 35,
-              mass: 0.6,
-              duration: 0.4
-            }}
-            className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-white tracking-tighter block title-font main-text iamtitle"
-          >
-            {words[index]}
-          </motion.span>
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-};
-
 export default function Home() {
-  const [headingText, setHeadingText] = useState("I AM");
-  const [equalLayout, setEqualLayout] = useState(false);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 1.8,
+      }
+    }
+  };
 
-  useEffect(() => {
-    const textTimer = setTimeout(() => {
-      setHeadingText("VADYM");
-    }, 6000);
-
-    const layoutTimer = setTimeout(() => {
-      setEqualLayout(true);
-    }, 6000);
-
-    return () => {
-      clearTimeout(textTimer);
-      clearTimeout(layoutTimer);
-    };
-  }, []);
-
-  const headingVariants = {
-    initial: {
-      opacity: 0,
-      y: 30,
-      rotateX: 40,
+  const lineVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 60,
+      rotateX: 45,
+      scale: 0.8
     },
-    animate: {
+    visible: {
       opacity: 1,
       y: 0,
       rotateX: 0,
+      scale: 1,
       transition: {
         type: "spring",
-        stiffness: 500,
-        damping: 30,
-        duration: 0.7,
-      }
-    },
-    exit: {
-      opacity: 0,
-      y: -30,
-      rotateX: -40,
-      transition: {
-        duration: 0.4,
-        ease: "easeInOut"
+        stiffness: 120,
+        damping: 15,
+        mass: 1,
+        duration: 1.2
       }
     }
   };
 
   return (
-    <div className="flex min-h-screen flex-col text-white relative overflow-hidden">
-      <main className="relative z-10 flex flex-1 flex-col">
-        <div className="flex flex-col md:flex-row flex-1 items-center justify-center p-4 md:p-10 lg:p-16">
-          <div
-            className={`w-full ${equalLayout ? 'md:w-1/2' : 'md:w-1/3'} flex justify-center md:justify-end pr-0 md:pr-8 md:mb-0 transition-all duration-1000 ease-in-out`}
+    <div className="flex min-h-screen flex-col relative overflow-hidden">
+      <main className="relative z-10 flex flex-1 flex-col justify-center items-center p-4">
+        <motion.div
+          className="flex flex-col justify-center h-[60vh] w-full max-w-[1920px]"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          style={{ perspective: "1000px" }}
+        >
+          <motion.h1 
+            className="font-black leading-[0.85] tracking-tighter text-left text-white"
+            style={{ 
+              fontSize: "clamp(3rem, 12vw, 16rem)",
+              transformStyle: "preserve-3d",
+              fontFamily: "var(--font-dm-sans)"
+            }}
+            variants={lineVariants}
           >
-            <div className="iamtitle-container">
-              <h1 className="font-bold text-white tracking-tighter text-right main-text iamtitle" 
-                  style={{ perspective: "1000px" }}>
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={headingText}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={headingVariants}
-                    style={{ display: "inline-block", transformOrigin: "center" }}
-                  >
-                    {headingText}
-                  </motion.span>
-                </AnimatePresence>
-              </h1>
-            </div>
-          </div>
-
-          <div
-            className={`w-full ${equalLayout ? 'md:w-1/2' : 'md:w-2/3'} flex flex-col justify-center pl-0 md:pl-8 transition-all duration-1000 ease-in-out`}
+            VADYM
+          </motion.h1>
+          <motion.h1 
+            className="font-black leading-[0.85] tracking-tighter text-right text-[#274c77]"
+            style={{ 
+              fontSize: "clamp(3rem, 12vw, 16rem)",
+              transformStyle: "preserve-3d",
+              fontFamily: "var(--font-dm-sans)"
+            }}
+            variants={lineVariants}
           >
-            <WordCarousel />
-          </div>
-        </div>
+            ORLOV
+          </motion.h1>
+        </motion.div>
       </main>
 
-      <footer className="w-full bg-black/50 relative z-10">
-        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-8 px-6 py-10">
+      <footer className="w-full relative z-10 flex justify-center md:justify-end">
+        <div className="flex flex-wrap items-center justify-center gap-8 px-6 py-10 w-full md:w-1/2">
           <IconLink
             href="https://github.com/iamorlov"
             icon="github"
