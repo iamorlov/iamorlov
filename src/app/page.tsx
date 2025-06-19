@@ -16,7 +16,7 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
     className="group flex flex-col items-center gap-2 transition-all duration-300 hover:scale-105"
     aria-label={label}
   >
-    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm p-3 text-white/80 transition-all group-hover:bg-white/30 group-hover:text-white">
+    <div className="flex h-12 w-12 items-center justify-center rounded-full backdrop-blur-sm p-3 transition-all bg-[#727D73]/20 text-[#727D73]/80 group-hover:bg-[#727D73]/30 group-hover:text-[#727D73] md:bg-white/20 md:text-white/80 md:group-hover:bg-white/30 md:group-hover:text-white">
       {icon === "github" && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@ const IconLink: FC<{ href: string; icon: string; label: string }> = ({
         </svg>
       )}
     </div>
-    <span className="text-xs font-medium text-white/70 transition-colors group-hover:text-white links-text">
+    <span className="text-xs font-medium transition-colors links-text text-[#727D73]/70 group-hover:text-[#727D73] md:text-white/70 md:group-hover:text-white">
       {label}
     </span>
   </a>
@@ -109,7 +109,23 @@ export default function Home() {
         stiffness: 100,
         damping: 20,
         duration: 1.0,
-        ease: "easeOut"
+        ease: "easeOut",
+      }
+    }
+  };
+
+  const footerVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 2.4,
       }
     }
   };
@@ -118,38 +134,78 @@ export default function Home() {
     <div className="flex min-h-screen flex-col relative overflow-hidden">
       <main className="relative z-10 flex flex-1 flex-col justify-center items-center p-4">
         <motion.div
-          className="flex flex-col justify-center h-[60vh] w-full max-w-[1920px] px-4"
+          className="flex flex-col justify-center h-[60vh] w-full max-w-[1920px] px-4 gap-8 md:gap-0"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           style={{ perspective: "1000px" }}
         >
-          <motion.h1 
-            className="font-black leading-[0.85] tracking-tighter text-left text-[#e9edc9]"
-            style={{ 
-              fontSize: "clamp(4rem, 13vw, 16rem)",
-              transformStyle: "preserve-3d",
-              fontFamily: "var(--font-dm-sans)"
-            }}
-            variants={vadymVariants}
-          >
-            VADYM
-          </motion.h1>
-          <motion.h1 
-            className="font-black leading-[0.85] tracking-tighter text-right text-[#384B70]"
-            style={{ 
-              fontSize: "clamp(4rem, 13vw, 16rem)",
-              transformStyle: "preserve-3d",
-              fontFamily: "var(--font-dm-sans)"
-            }}
-            variants={orlovVariants}
-          >
-            ORLOV
-          </motion.h1>
+          {/* Desktop Layout - Side by side */}
+          <div className="hidden md:flex md:flex-row md:h-full">
+            {/* Left half for VADYM */}
+            <div className="w-1/2 flex items-center justify- pr-4">
+              <motion.h1 
+                className="font-black leading-[0.85] tracking-tighter text-center text-[#e9edc9] max-w-full overflow-hidden mb-[6rem]"
+                style={{ 
+                  fontSize: "clamp(6rem, 12.5vw, 14rem)",
+                  transformStyle: "preserve-3d",
+                  fontFamily: "var(--font-dm-sans)"
+                }}
+                variants={vadymVariants}
+              >
+                VADYM
+              </motion.h1>
+            </div>
+            {/* Right half for ORLOV */}
+            <div className="w-1/2 flex items-center justify-end pl-4">
+              <motion.h1 
+                className="font-black leading-[0.85] tracking-tighter text-center text-[#384B70] max-w-full overflow-hidden mt-[6rem]"
+                style={{ 
+                  fontSize: "clamp(6rem, 12.5vw, 14rem)",
+                  transformStyle: "preserve-3d",
+                  fontFamily: "var(--font-dm-sans)"
+                }}
+                variants={orlovVariants}
+              >
+                ORLOV
+              </motion.h1>
+            </div>
+          </div>
+
+          {/* Mobile Layout - Stacked */}
+          <div className="flex flex-col md:hidden h-full justify-center items-center gap-16">
+            <motion.h1 
+              className="font-black leading-[0.85] tracking-tighter text-center text-[#e9edc9] max-w-full overflow-hidden"
+              style={{ 
+                fontSize: "clamp(5rem, 16vw, 10rem)",
+                transformStyle: "preserve-3d",
+                fontFamily: "var(--font-dm-sans)"
+              }}
+              variants={vadymVariants}
+            >
+              VADYM
+            </motion.h1>
+            <motion.h1 
+              className="font-black leading-[0.85] tracking-tighter text-center text-[#384B70] max-w-full overflow-hidden"
+              style={{ 
+                fontSize: "clamp(5rem, 16vw, 10rem)",
+                transformStyle: "preserve-3d",
+                fontFamily: "var(--font-dm-sans)"
+              }}
+              variants={orlovVariants}
+            >
+              ORLOV
+            </motion.h1>
+          </div>
         </motion.div>
       </main>
 
-      <footer className="w-full relative z-10 flex justify-center md:justify-start">
+      <motion.footer 
+        className="w-full z-10 flex justify-center md:justify-start md:relative fixed bottom-0 left-0"
+        variants={footerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="flex flex-wrap items-center justify-center gap-8 px-6 py-10 w-full md:w-1/2">
           <IconLink
             href="https://github.com/iamorlov"
@@ -167,7 +223,7 @@ export default function Home() {
             label="Email"
           />
         </div>
-      </footer>
+      </motion.footer>
     </div>
   );
 }
