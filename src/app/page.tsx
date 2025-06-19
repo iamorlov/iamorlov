@@ -173,7 +173,7 @@ export default function Home() {
           </div>
 
           {/* Mobile Layout - Stacked */}
-          <div className="flex flex-col md:hidden h-full justify-center items-center gap-16">
+          <div className="flex flex-col md:hidden h-full justify-center items-center gap-22">
             <motion.h1 
               className="font-black leading-[0.85] tracking-tighter text-center text-[#e9edc9] max-w-full overflow-hidden"
               style={{ 

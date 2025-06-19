@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import ParticleLayer from "./ParticleLayer";
 
 const AnimatedBackground = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,7 +32,7 @@ const AnimatedBackground = () => {
       
       {/* Right side - Desktop */}
       <motion.div
-        className="absolute inset-0 hidden md:block"
+        className="absolute inset-0 hidden md:block z-5"
         style={{
           background: "#F7E7DC",
           clipPath: `polygon(${50 - angleOffset/2}% 0%, 100% 0%, 100% 100%, ${50 + angleOffset/2}% 100%)`,
@@ -58,7 +59,7 @@ const AnimatedBackground = () => {
       
       {/* Bottom side - Mobile */}
       <motion.div
-        className="absolute inset-0 md:hidden"
+        className="absolute inset-0 md:hidden z-5"
         style={{
           background: "#F7E7DC",
           clipPath: "polygon(0% 52%, 100% 48%, 100% 100%, 0% 100%)",
@@ -74,11 +75,14 @@ const AnimatedBackground = () => {
 
       {/* Subtle overlay for depth */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-transparent via-black/5 to-black/10"
+        className="absolute inset-0 bg-gradient-to-br from-transparent via-black/5 to-black/15"
         initial={{ opacity: 0 }}
         animate={{ opacity: isVisible ? 1 : 0 }}
         transition={{ duration: 1, delay: 1 }}
       />
+
+      {/* Particle Layer */}
+      <ParticleLayer />
     </div>
   );
 };

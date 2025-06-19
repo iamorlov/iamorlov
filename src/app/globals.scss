@@ -35,7 +35,7 @@ h1 {
   letter-spacing: 0.015em;
   padding: 0;
   font-family: var(--font-dm-sans);
-  
+
   span {
     color: var(--white);
   }
@@ -45,9 +45,11 @@ h1 {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -55,7 +57,7 @@ h1 {
 
 .title-font {
   font-family: var(--font-dm-sans);
-  background: linear-gradient(to top,  $purple-medium, $purple-primary, $purple-light);
+  background: linear-gradient(to top, $purple-medium, $purple-primary, $purple-light);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -74,8 +76,4 @@ h1 {
   .main-text {
     text-align: center;
   }
-}
-
-footer {
-  backdrop-filter: blur(1px);
 }
