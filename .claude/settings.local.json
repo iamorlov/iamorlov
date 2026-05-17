@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Code\\\\_react\\\\iamorlov\\\\src\" -Recurse -File)",
+      "Bash(Select-Object FullName)"
+    ]
+  }
+}
