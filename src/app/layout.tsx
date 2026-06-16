@@ -18,8 +18,9 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Vadym Orlov",
-  description: "Vadym Orlov | Official web site",
+  title: "Vadym Orlov — Software Engineer & Game Developer",
+  description:
+    "Vadym Orlov — Software Engineer and Game Developer. Personal site and released mobile games.",
 };
 
 export default function RootLayout({

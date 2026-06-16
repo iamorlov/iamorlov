@@ -66,7 +66,7 @@ const ParticleLayer = () => {
           originalY: y,
           size: Math.random() * 2 + 0.5,
           opacity: Math.random() * 0.6 + 0.2,
-          hue: Math.random() * 60 + 200, // Blue-ish hues
+          hue: Math.random() * 90 + 200, // Blue → purple hues (brand accent)
         });
       }
       
