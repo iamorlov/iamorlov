@@ -6,13 +6,13 @@ import { motion, useReducedMotion } from "framer-motion";
 const EXPO = [0.16, 1, 0.3, 1] as const;
 const QUINT = [0.22, 1, 0.36, 1] as const;
 
-const Word: FC<{ text: string; hollow?: boolean; delay: number; reduced: boolean }> = ({
+const Word: FC<{ text: string; accent?: boolean; delay: number; reduced: boolean }> = ({
   text,
-  hollow,
+  accent,
   delay,
   reduced,
 }) => (
-  <span className={`name-row${hollow ? " name-row--hollow" : ""}`} aria-hidden="true">
+  <span className={`name-row${accent ? " name-row--accent" : ""}`} aria-hidden="true">
     {text.split("").map((letter, i) => (
       <motion.span
         key={i}
@@ -92,7 +92,7 @@ export default function Home() {
       <main className="identity">
         <h1 className="name" aria-label="Vadym Orlov">
           <Word text="VADYM" delay={0.15} reduced={reduced} />
-          <Word text="ORLOV" hollow delay={0.4} reduced={reduced} />
+          <Word text="ORLOV" accent delay={0.4} reduced={reduced} />
         </h1>
 
         <motion.div

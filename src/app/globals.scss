@@ -137,16 +137,8 @@ body {
   white-space: nowrap;
 }
 
-.name-row--hollow {
-  color: transparent;
-  -webkit-text-stroke: clamp(1px, 0.15vw, 2px) var(--porcelain);
-  transition: color 0.6s var(--ease-out-quint);
-}
-
-@media (pointer: fine) {
-  .name:hover .name-row--hollow {
-    color: var(--porcelain);
-  }
+.name-row--accent {
+  color: var(--accent);
 }
 
 .name-letter {
@@ -257,8 +249,7 @@ body {
 
   .link,
   .link::after,
-  .link svg,
-  .name-row--hollow {
+  .link svg {
     transition-duration: 0.01ms;
   }
 }

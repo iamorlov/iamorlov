@@ -14,16 +14,16 @@ All tokens OKLCH, defined in `src/app/globals.scss`:
 | `--bg-lift` | `oklch(20% 0.016 250)` | Ambient light drift |
 | `--porcelain` | `oklch(92% 0.01 240)` | Primary type (cool porcelain white) |
 | `--porcelain-dim` | `oklch(70% 0.014 245)` | Secondary type, resting links |
-| `--accent` | `oklch(70% 0.13 250)` | Sapphire: hairline, hovers, focus, period, selection |
+| `--accent` | `oklch(70% 0.13 250)` | Sapphire: ORLOV fill, hairline, hovers, focus, period, selection |
 | `--accent-deep` | `oklch(56% 0.14 258)` | Hairline gradient tail |
 
-Strategy: Restrained. Sapphire stays under 10% of the surface; never add a second accent. Accent hue changes happen in `--accent` / `--accent-deep` plus the three atmosphere gradients only.
+Strategy: Committed. Sapphire carries the second name word plus all interactive accents; never add a second accent color. Accent hue changes happen in `--accent` / `--accent-deep` plus the three atmosphere gradients only.
 
 ## Typography
 
 Single family: **Gabarito** (variable, via next/font). Rounded geometric; soft but premium.
 
-- Name: weight 900, uppercase, `line-height 0.88`, tracking −0.02em, `font-size: min(clamp(5rem, 17vw, 17rem), 27svh, 24vw)` (24vw term guards 320px screens). Second word (ORLOV) hollow: transparent fill + porcelain text-stroke.
+- Name: weight 900, uppercase, `line-height 0.88`, tracking −0.02em, `font-size: min(clamp(5rem, 17vw, 17rem), 27svh, 24vw)` (24vw term guards 320px screens). VADYM solid porcelain, ORLOV solid sapphire. Never outline/hollow text: outline strokes cross where negative tracking overlaps glyphs.
 - Role line: weight 300, uppercase, tracking 0.14em, sapphire period.
 - Link labels: weight 500, 0.85rem, uppercase, tracking 0.09em.
 
