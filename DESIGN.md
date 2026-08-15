@@ -32,7 +32,13 @@ Single family: **Gabarito** (variable, via next/font). Rounded geometric; soft b
 
 Easings: `--ease-out-expo` (0.16,1,0.3,1), `--ease-out-quint` (0.22,1,0.36,1). No bounce, no elastic.
 
-Load choreography (framer-motion): letters rise with blur-reveal (0.05s stagger, 0.9s expo), VADYM at 0.15s, ORLOV at 0.4s; hairline draws scaleX at 1.05s; role fades up at 1.2s; links stagger from 1.55s. Idle: canvas grain at 12fps, 70s light drift, 11s glow breath, cursor sheen (fine pointers only). `prefers-reduced-motion`: everything collapses to 0.3s opacity fades, grain freezes.
+Load choreography (framer-motion): letters rise with blur-reveal (0.05s stagger, 0.9s expo), VADYM at 0.15s, ORLOV at 0.4s; hairline draws scaleX at 1.05s; role fades up at 1.2s; links stagger from 1.55s.
+
+Idle: canvas grain at 12fps; 70s light drift; 11s glow breath; hairline spectrum drifts along the strand (10s alternate, 220% background-size under an edge-fade mask); cursor sheen plus glow parallax (lerped `--mx`/`--my` vars on the atmosphere container, fine pointers only).
+
+Interaction: name letters lift 0.045em under cursor (0.25s quart); link underline sweep and icon lift.
+
+`prefers-reduced-motion`: choreography collapses to 0.3s opacity fades, grain freezes, drift/parallax/letter-lift off.
 
 ## Components
 

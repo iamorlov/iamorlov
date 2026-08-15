@@ -9,7 +9,7 @@ const GRAIN_FPS = 12;
 // cursor-tracked sheen on fine pointers only.
 export default function Atmosphere() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const sheenRef = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -61,8 +61,8 @@ export default function Atmosphere() {
   }, []);
 
   useEffect(() => {
-    const sheen = sheenRef.current;
-    if (!sheen) return;
+    const wrap = wrapRef.current;
+    if (!wrap) return;
     if (!window.matchMedia("(pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -80,8 +80,8 @@ export default function Atmosphere() {
     const loop = () => {
       x += (tx - x) * 0.06;
       y += (ty - y) * 0.06;
-      sheen.style.setProperty("--mx", `${x.toFixed(1)}px`);
-      sheen.style.setProperty("--my", `${y.toFixed(1)}px`);
+      wrap.style.setProperty("--mx", `${x.toFixed(1)}px`);
+      wrap.style.setProperty("--my", `${y.toFixed(1)}px`);
       raf = requestAnimationFrame(loop);
     };
 
@@ -94,10 +94,10 @@ export default function Atmosphere() {
   }, []);
 
   return (
-    <div className="atmosphere" aria-hidden="true">
+    <div ref={wrapRef} className="atmosphere" aria-hidden="true">
       <div className="atmosphere-light" />
       <div className="atmosphere-glow" />
-      <div ref={sheenRef} className="atmosphere-sheen" />
+      <div className="atmosphere-sheen" />
       <canvas ref={canvasRef} className="atmosphere-grain" />
     </div>
   );

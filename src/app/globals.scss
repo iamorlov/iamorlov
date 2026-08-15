@@ -65,6 +65,11 @@ body {
   inset: 0;
   background: radial-gradient(60vmax 42vmax at 12% 104%, oklch(45% 0.1 255 / 0.16), transparent 60%);
   animation: glow-breath 11s ease-in-out infinite alternate;
+  transform: translate3d(
+    calc((var(--mx, 50vw) - 50vw) * -0.03),
+    calc((var(--my, 50vh) - 50vh) * -0.03),
+    0
+  );
 }
 
 .atmosphere-sheen {
@@ -152,8 +157,20 @@ body {
   width: min(30ch, 58%);
   margin-block: clamp(1.25rem, 3.2vh, 2.5rem) clamp(1rem, 2.4vh, 1.75rem);
   margin-inline: auto;
-  background: linear-gradient(90deg, transparent, var(--accent-mint) 22%, var(--accent) 50%, var(--accent-violet) 78%, transparent);
+  background: linear-gradient(90deg, var(--accent-mint), var(--accent) 35%, var(--accent-violet) 70%, var(--accent-mint));
+  background-size: 220% 100%;
+  mask-image: linear-gradient(90deg, transparent, #000 18% 82%, transparent);
   transform-origin: center center;
+  animation: hairline-drift 10s ease-in-out infinite alternate;
+}
+
+@keyframes hairline-drift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
 }
 
 .role {
@@ -244,7 +261,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .atmosphere-light,
-  .atmosphere-glow {
+  .atmosphere-glow,
+  .hairline {
     animation: none;
   }
 

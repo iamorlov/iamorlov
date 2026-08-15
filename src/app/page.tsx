@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 const QUINT = [0.22, 1, 0.36, 1] as const;
+const QUART = [0.25, 1, 0.5, 1] as const;
 
 const Word: FC<{ text: string; accent?: boolean; delay: number; reduced: boolean }> = ({
   text,
@@ -26,6 +27,11 @@ const Word: FC<{ text: string; accent?: boolean; delay: number; reduced: boolean
           reduced
             ? { opacity: 1 }
             : { opacity: 1, y: "0em", filter: "blur(0px)" }
+        }
+        whileHover={
+          reduced
+            ? undefined
+            : { y: "-0.045em", transition: { duration: 0.25, ease: QUART } }
         }
         transition={
           reduced
