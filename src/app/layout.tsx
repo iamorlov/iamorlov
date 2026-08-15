@@ -1,25 +1,22 @@
-import type { Metadata } from "next";
-import { DM_Sans, Outfit } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Archivo } from "next/font/google";
 import "./globals.scss";
-import ClientBackground from "@/components/ClientBackground";
+import Atmosphere from "@/components/Atmosphere";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "500", "700", "900"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "500", "700", "900"],
+  axes: ["wdth"],
 });
 
 export const metadata: Metadata = {
   title: "Vadym Orlov",
-  description: "Vadym Orlov | Official web site",
+  description: "Vadym Orlov. Software Engineer and Game Developer.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#171310",
 };
 
 export default function RootLayout({
@@ -29,8 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${outfit.variable} antialiased`}>
-        <ClientBackground />
+      <body className={`${archivo.variable} antialiased`}>
+        <Atmosphere />
         {children}
       </body>
     </html>
