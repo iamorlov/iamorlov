@@ -21,9 +21,9 @@ Strategy: Restrained. Sapphire stays under 10% of the surface; never add a secon
 
 ## Typography
 
-Single family: **Sora** (variable, via next/font).
+Single family: **Gabarito** (variable, via next/font). Rounded geometric; soft but premium.
 
-- Name: weight 800, uppercase, `line-height 0.86`, tracking −0.03em, `font-size: min(clamp(4.5rem, 17vw, 17rem), 27svh)`. Second word (ORLOV) hollow: transparent fill + porcelain text-stroke, indented 0.55ch.
+- Name: weight 900, uppercase, `line-height 0.88`, tracking −0.02em, `font-size: min(clamp(5rem, 17vw, 17rem), 27svh, 24vw)` (24vw term guards 320px screens). Second word (ORLOV) hollow: transparent fill + porcelain text-stroke.
 - Role line: weight 300, uppercase, tracking 0.14em, sapphire period.
 - Link labels: weight 500, 0.85rem, uppercase, tracking 0.09em.
 
@@ -36,7 +36,7 @@ Load choreography (framer-motion): letters rise with blur-reveal (0.05s stagger,
 ## Components
 
 - `Atmosphere` (`src/components/Atmosphere.tsx`): fixed background stack — CSS light drift, sapphire glow, cursor sheen (lerped CSS vars), grain canvas (160px noise tile, pattern fill, dpr ≤2, pauses when hidden).
-- `.stage`: 100dvh grid `1fr auto`, fluid padding `clamp(1.5rem, 4.5vw, 4.5rem)`, safe-area aware.
+- `.stage`: 100dvh grid `1fr auto`, fluid padding `clamp(1.5rem, 4.5vw, 4.5rem)`, safe-area aware. Composition is centered: name, hairline (symmetric fade, draws from center), role, and links all on the vertical axis.
 - `.link`: icon + label, sapphire underline sweep (scaleX), icon lifts 2px on hover, ≥44px touch target.
 
 ## Rules

@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Sora } from "next/font/google";
+import { Gabarito } from "next/font/google";
 import "./globals.scss";
 import Atmosphere from "@/components/Atmosphere";
 
-const sora = Sora({
-  variable: "--font-sora",
+const gabarito = Gabarito({
+  variable: "--font-gabarito",
   subsets: ["latin"],
   display: "swap",
 });
@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sora.variable} antialiased`}>
+      <body className={`${gabarito.variable} antialiased`}>
         <Atmosphere />
         {children}
       </body>
