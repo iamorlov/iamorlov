@@ -2,7 +2,7 @@
 
 ## Theme
 
-Graphite & Sapphire. Matte premium dark: cool graphite near-black, film grain, one sapphire accent. Machined, nocturnal, precise. Single screen (100dvh), no scrolling at any viewport.
+Graphite & Spectrum. Matte premium dark: cool graphite near-black, film grain, a quiet three-hue cool spectrum (mint, sapphire, violet) led by sapphire. Machined, nocturnal, precise. Single screen (100dvh), no scrolling at any viewport.
 
 ## Color
 
@@ -11,19 +11,20 @@ All tokens OKLCH, defined in `src/app/globals.scss`:
 | Token | Value | Role |
 |---|---|---|
 | `--bg` | `oklch(15.5% 0.01 255)` | Page background (cool graphite) |
-| `--bg-lift` | `oklch(20% 0.016 250)` | Ambient light drift |
 | `--porcelain` | `oklch(92% 0.01 240)` | Primary type (cool porcelain white) |
 | `--porcelain-dim` | `oklch(70% 0.014 245)` | Secondary type, resting links |
-| `--accent` | `oklch(70% 0.13 250)` | Sapphire: ORLOV fill, hairline, hovers, focus, period, selection |
-| `--accent-deep` | `oklch(56% 0.14 258)` | Hairline gradient tail |
+| `--accent` | `oklch(70% 0.13 250)` | Sapphire: ORLOV fill, hairline center, hovers, focus, selection |
+| `--accent-deep` | `oklch(56% 0.14 258)` | Reserved deep sapphire |
+| `--accent-mint` | `oklch(78% 0.1 175)` | Mint: role period, hairline left |
+| `--accent-violet` | `oklch(66% 0.1 300)` | Violet: hairline right, top-right atmosphere breath |
 
-Strategy: Committed. Sapphire carries the second name word plus all interactive accents; never add a second accent color. Accent hue changes happen in `--accent` / `--accent-deep` plus the three atmosphere gradients only.
+Strategy: Full palette, quiet. Three cool hues (mint 175, sapphire 250, violet 300), each with a fixed role. Sapphire leads (ORLOV + all interactive states); mint and violet appear only as punctuation and ambience. Never let mint or violet take an interactive role, never add a fourth hue, keep chroma ≤0.13 (matte, not neon).
 
 ## Typography
 
 Single family: **Gabarito** (variable, via next/font). Rounded geometric; soft but premium.
 
-- Name: weight 900, uppercase, `line-height 0.88`, tracking −0.02em, `font-size: min(clamp(5rem, 17vw, 17rem), 27svh, 24vw)` (24vw term guards 320px screens). VADYM solid porcelain, ORLOV solid sapphire. Never outline/hollow text: outline strokes cross where negative tracking overlaps glyphs.
+- Name: weight 700, uppercase, `line-height 0.88`, tracking −0.015em, `font-size: min(clamp(5rem, 17vw, 17rem), 27svh, 24vw)` (24vw term guards 320px screens). VADYM solid porcelain, ORLOV solid sapphire. Never outline/hollow text: outline strokes cross where negative tracking overlaps glyphs. Never weight 900 (user finds it too heavy).
 - Role line: weight 300, uppercase, tracking 0.14em, sapphire period.
 - Link labels: weight 500, 0.85rem, uppercase, tracking 0.09em.
 
