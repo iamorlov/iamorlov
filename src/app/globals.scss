@@ -1,13 +1,10 @@
 @use "tailwindcss" as *;
 
 :root {
-  --bg: oklch(15.5% 0.01 255);
-  --porcelain: oklch(92% 0.01 240);
-  --porcelain-dim: oklch(70% 0.014 245);
-  --accent: oklch(70% 0.13 250);
-  --accent-deep: oklch(56% 0.14 258);
-  --accent-mint: oklch(78% 0.1 175);
-  --accent-violet: oklch(66% 0.1 300);
+  --bg: oklch(14.5% 0.005 260);
+  --white: oklch(94% 0.004 260);
+  --white-dim: oklch(68% 0.005 260);
+  --gray: oklch(55% 0.006 260);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
@@ -23,7 +20,7 @@ html {
 
 body {
   background: var(--bg);
-  color: var(--porcelain);
+  color: var(--white);
   font-family: var(--font-gabarito), system-ui, sans-serif;
   height: 100dvh;
   overflow: hidden;
@@ -31,12 +28,12 @@ body {
 }
 
 ::selection {
-  background: var(--accent);
+  background: var(--white);
   color: var(--bg);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--white);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -55,15 +52,15 @@ body {
   position: absolute;
   inset: -12%;
   background:
-    radial-gradient(120vmax 90vmax at 80% -12%, oklch(20% 0.03 295 / 0.9), transparent 62%),
-    radial-gradient(90vmax 70vmax at 8% 112%, oklch(19% 0.03 250 / 0.55), transparent 58%);
+    radial-gradient(120vmax 90vmax at 80% -12%, oklch(19.5% 0.006 260 / 0.9), transparent 62%),
+    radial-gradient(90vmax 70vmax at 8% 112%, oklch(18.5% 0.006 260 / 0.55), transparent 58%);
   animation: light-drift 70s var(--ease-out-quint) infinite alternate;
 }
 
 .atmosphere-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(60vmax 42vmax at 12% 104%, oklch(45% 0.1 255 / 0.16), transparent 60%);
+  background: radial-gradient(60vmax 42vmax at 12% 104%, oklch(48% 0.005 260 / 0.13), transparent 60%);
   animation: glow-breath 11s ease-in-out infinite alternate;
   transform: translate3d(
     calc((var(--mx, 50vw) - 50vw) * -0.03),
@@ -75,7 +72,7 @@ body {
 .atmosphere-sheen {
   position: absolute;
   inset: 0;
-  background: radial-gradient(38rem 38rem at var(--mx, 50%) var(--my, 35%), oklch(32% 0.03 250 / 0.35), transparent 70%);
+  background: radial-gradient(38rem 38rem at var(--mx, 50%) var(--my, 35%), oklch(30% 0.004 260 / 0.35), transparent 70%);
   mix-blend-mode: soft-light;
 }
 
@@ -144,7 +141,7 @@ body {
 }
 
 .name-row--accent {
-  color: var(--accent);
+  color: var(--gray);
 }
 
 .name-letter {
@@ -157,7 +154,7 @@ body {
   width: min(30ch, 58%);
   margin-block: clamp(1.25rem, 3.2vh, 2.5rem) clamp(1rem, 2.4vh, 1.75rem);
   margin-inline: auto;
-  background: linear-gradient(90deg, var(--accent-mint), var(--accent) 35%, var(--accent-violet) 70%, var(--accent-mint));
+  background: linear-gradient(90deg, var(--gray), var(--white) 40%, var(--gray) 75%, var(--white));
   background-size: 220% 100%;
   mask-image: linear-gradient(90deg, transparent, #000 18% 82%, transparent);
   transform-origin: center center;
@@ -178,12 +175,12 @@ body {
   font-size: clamp(0.95rem, 1.1vw + 0.55rem, 1.4rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--porcelain-dim);
+  color: var(--white-dim);
   text-wrap: balance;
 }
 
 .role-period {
-  color: var(--accent-mint);
+  color: var(--white);
   font-weight: 500;
 }
 
@@ -207,14 +204,14 @@ body {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--porcelain-dim);
+  color: var(--white-dim);
   transition: color 0.3s var(--ease-out-quint);
 }
 
 .link svg {
   width: 1.05rem;
   height: 1.05rem;
-  transition: stroke 0.3s var(--ease-out-quint), transform 0.45s var(--ease-out-expo);
+  transition: transform 0.45s var(--ease-out-expo);
 }
 
 .link::after {
@@ -224,7 +221,7 @@ body {
   right: 0;
   bottom: 0.25rem;
   height: 1px;
-  background: var(--accent);
+  background: var(--white);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.45s var(--ease-out-expo);
@@ -232,7 +229,7 @@ body {
 
 .link:hover,
 .link:focus-visible {
-  color: var(--porcelain);
+  color: var(--white);
 }
 
 .link:hover::after,
@@ -242,7 +239,6 @@ body {
 
 .link:hover svg {
   transform: translateY(-2px);
-  stroke: var(--accent);
 }
 
 /* ---------- Short / landscape viewports ---------- */
