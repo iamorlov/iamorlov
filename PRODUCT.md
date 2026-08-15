@@ -14,7 +14,7 @@ Single-screen personal identity card for Vadym Orlov. Not a CV, not a project ga
 
 ## Brand Personality
 
-Machined, nocturnal, precise. The site should feel like a well-made physical object in low light: matte surfaces, one heated edge. Confidence through restraint and finish quality, not through volume of content.
+Machined, nocturnal, precise. The site should feel like a well-made physical object in low light: matte surfaces, one sapphire edge. Confidence through restraint and finish quality, not through volume of content.
 
 ## Anti-references
 
@@ -27,7 +27,7 @@ Machined, nocturnal, precise. The site should feel like a well-made physical obj
 
 - One screen, one idea: everything visible without scrolling on every device.
 - Typography IS the imagery: the name carries the visual weight; no stock photos, no illustrations.
-- Matte over gloss: grain, soft light, low-chroma warm darks; a single ember accent used sparingly.
+- Matte over gloss: grain, soft light, low-chroma cool darks; a single sapphire accent used sparingly.
 - Motion as craft signature: one orchestrated load choreography plus quiet idle life; never decorative confetti.
 - Content is frozen: name, one positioning line, three links. Never invent copy.
 

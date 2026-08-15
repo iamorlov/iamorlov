@@ -1,13 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
+import { Sora } from "next/font/google";
 import "./globals.scss";
 import Atmosphere from "@/components/Atmosphere";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   display: "swap",
-  axes: ["wdth"],
 });
 
 export const metadata: Metadata = {
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#171310",
+  themeColor: "#121419",
 };
 
 export default function RootLayout({
@@ -26,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${archivo.variable} antialiased`}>
+      <body className={`${sora.variable} antialiased`}>
         <Atmosphere />
         {children}
       </body>

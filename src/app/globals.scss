@@ -1,13 +1,12 @@
 @use "tailwindcss" as *;
 
 :root {
-  --bg: oklch(15.5% 0.008 75);
-  --bg-lift: oklch(20% 0.014 70);
-  --bone: oklch(92% 0.015 85);
-  --bone-dim: oklch(70% 0.016 80);
-  --bone-faint: oklch(48% 0.012 78);
-  --ember: oklch(73% 0.125 55);
-  --ember-deep: oklch(58% 0.13 45);
+  --bg: oklch(15.5% 0.01 255);
+  --bg-lift: oklch(20% 0.016 250);
+  --porcelain: oklch(92% 0.01 240);
+  --porcelain-dim: oklch(70% 0.014 245);
+  --accent: oklch(70% 0.13 250);
+  --accent-deep: oklch(56% 0.14 258);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
@@ -23,20 +22,20 @@ html {
 
 body {
   background: var(--bg);
-  color: var(--bone);
-  font-family: var(--font-archivo), system-ui, sans-serif;
+  color: var(--porcelain);
+  font-family: var(--font-sora), system-ui, sans-serif;
   height: 100dvh;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--ember);
+  background: var(--accent);
   color: var(--bg);
 }
 
 :focus-visible {
-  outline: 2px solid var(--ember);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -56,21 +55,21 @@ body {
   inset: -12%;
   background:
     radial-gradient(120vmax 90vmax at 80% -12%, var(--bg-lift), transparent 62%),
-    radial-gradient(90vmax 70vmax at 8% 112%, oklch(19% 0.03 55 / 0.55), transparent 58%);
+    radial-gradient(90vmax 70vmax at 8% 112%, oklch(19% 0.03 250 / 0.55), transparent 58%);
   animation: light-drift 70s var(--ease-out-quint) infinite alternate;
 }
 
-.atmosphere-ember {
+.atmosphere-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(60vmax 42vmax at 12% 104%, oklch(45% 0.1 50 / 0.14), transparent 60%);
-  animation: ember-breath 11s ease-in-out infinite alternate;
+  background: radial-gradient(60vmax 42vmax at 12% 104%, oklch(45% 0.1 255 / 0.16), transparent 60%);
+  animation: glow-breath 11s ease-in-out infinite alternate;
 }
 
 .atmosphere-sheen {
   position: absolute;
   inset: 0;
-  background: radial-gradient(38rem 38rem at var(--mx, 50%) var(--my, 35%), oklch(32% 0.025 65 / 0.35), transparent 70%);
+  background: radial-gradient(38rem 38rem at var(--mx, 50%) var(--my, 35%), oklch(32% 0.03 250 / 0.35), transparent 70%);
   mix-blend-mode: soft-light;
 }
 
@@ -98,7 +97,7 @@ body {
   }
 }
 
-@keyframes ember-breath {
+@keyframes glow-breath {
   from {
     opacity: 0.55;
   }
@@ -125,13 +124,12 @@ body {
 }
 
 .name {
-  font-weight: 900;
-  font-stretch: 125%;
-  font-size: min(clamp(4.25rem, 16.5vw, 17rem), 27svh);
-  line-height: 0.84;
-  letter-spacing: -0.025em;
+  font-weight: 800;
+  font-size: min(clamp(4.5rem, 17vw, 17rem), 27svh);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
-  margin-left: -0.045em; /* optical left alignment */
+  margin-left: -0.04em; /* optical left alignment */
 }
 
 .name-row {
@@ -141,14 +139,14 @@ body {
 
 .name-row--hollow {
   color: transparent;
-  -webkit-text-stroke: clamp(1px, 0.15vw, 2px) var(--bone);
+  -webkit-text-stroke: clamp(1px, 0.15vw, 2px) var(--porcelain);
   margin-left: 0.55ch;
   transition: color 0.6s var(--ease-out-quint);
 }
 
 @media (pointer: fine) {
   .name:hover .name-row--hollow {
-    color: var(--bone);
+    color: var(--porcelain);
   }
 }
 
@@ -161,7 +159,7 @@ body {
   height: 1px;
   width: min(38ch, 72%);
   margin-block: clamp(1.25rem, 3.2vh, 2.5rem) clamp(1rem, 2.4vh, 1.75rem);
-  background: linear-gradient(90deg, var(--ember), var(--ember-deep) 55%, transparent);
+  background: linear-gradient(90deg, var(--accent), var(--accent-deep) 55%, transparent);
   transform-origin: left center;
 }
 
@@ -170,12 +168,12 @@ body {
   font-size: clamp(0.95rem, 1.1vw + 0.55rem, 1.4rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--bone-dim);
+  color: var(--porcelain-dim);
   text-wrap: balance;
 }
 
 .role-period {
-  color: var(--ember);
+  color: var(--accent);
   font-weight: 500;
 }
 
@@ -198,7 +196,7 @@ body {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--bone-dim);
+  color: var(--porcelain-dim);
   transition: color 0.3s var(--ease-out-quint);
 }
 
@@ -215,7 +213,7 @@ body {
   right: 0;
   bottom: 0.25rem;
   height: 1px;
-  background: var(--ember);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.45s var(--ease-out-expo);
@@ -223,7 +221,7 @@ body {
 
 .link:hover,
 .link:focus-visible {
-  color: var(--bone);
+  color: var(--porcelain);
 }
 
 .link:hover::after,
@@ -233,14 +231,14 @@ body {
 
 .link:hover svg {
   transform: translateY(-2px);
-  stroke: var(--ember);
+  stroke: var(--accent);
 }
 
 /* ---------- Short / landscape viewports ---------- */
 
 @media (max-height: 480px) {
   .name {
-    font-size: min(clamp(3rem, 12vw, 8rem), 30svh);
+    font-size: min(clamp(3rem, 11vw, 8rem), 27svh);
   }
 
   .hairline {
@@ -252,7 +250,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .atmosphere-light,
-  .atmosphere-ember {
+  .atmosphere-glow {
     animation: none;
   }
 

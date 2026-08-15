@@ -96,7 +96,7 @@ export default function Atmosphere() {
   return (
     <div className="atmosphere" aria-hidden="true">
       <div className="atmosphere-light" />
-      <div className="atmosphere-ember" />
+      <div className="atmosphere-glow" />
       <div ref={sheenRef} className="atmosphere-sheen" />
       <canvas ref={canvasRef} className="atmosphere-grain" />
     </div>
