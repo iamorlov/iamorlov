@@ -1,25 +1,25 @@
 @use "tailwindcss" as *;
 
 :root {
-  --navy: oklch(38% 0.058 265);
-  --navy-deep: oklch(33% 0.06 265);
-  --cream: oklch(93% 0.042 108);
-  --peach: oklch(93.5% 0.028 70);
-  --sage: oklch(52% 0.035 150);
+  --ink: oklch(21% 0.035 270);
+  --ink-deep: oklch(16.5% 0.03 270);
+  --flame: oklch(63% 0.17 38);
+  --warm-white: oklch(94% 0.015 60);
+  --warm-white-dim: oklch(78% 0.02 60);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
-  background: var(--navy);
+  background: var(--ink);
   height: 100%;
   overscroll-behavior: none;
 }
 
 body {
-  background: var(--navy);
-  color: var(--cream);
+  background: var(--ink);
+  color: var(--warm-white);
   font-family: var(--font-gabarito), system-ui, sans-serif;
   height: 100dvh;
   overflow: hidden;
@@ -27,8 +27,8 @@ body {
 }
 
 ::selection {
-  background: var(--navy-deep);
-  color: var(--cream);
+  background: var(--flame);
+  color: var(--ink-deep);
 }
 
 :focus-visible {
@@ -70,12 +70,12 @@ body {
 }
 
 .name-word--vadym {
-  color: var(--cream);
+  color: var(--warm-white);
   transform: translateY(calc(-1 * clamp(2rem, 7vh, 5rem)));
 }
 
 .name-word--orlov {
-  color: var(--navy);
+  color: var(--ink);
   transform: translateY(clamp(2rem, 7vh, 5rem));
 }
 
@@ -99,32 +99,29 @@ body {
   }
 }
 
-/* ---------- Role line (sits on the seam, inverts per panel) ---------- */
+/* ---------- Role line (always fully on the ink panel; never crosses the seam) ---------- */
 
 .role {
   position: absolute;
-  left: 50%;
-  top: 74svh;
+  left: 25%;
+  top: 63svh;
   transform: translateX(-50%);
   margin: 0;
+  max-width: 44vw;
   font-weight: 400;
   font-size: clamp(0.85rem, 0.9vw + 0.5rem, 1.25rem);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-align: center;
-  white-space: nowrap;
-  color: oklch(100% 0 0);
-  mix-blend-mode: difference;
-  opacity: 0.85;
+  text-wrap: balance;
+  color: var(--warm-white-dim);
 }
 
 @media (max-width: 767px) {
   .role {
-    top: 50svh;
-    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 36.5svh;
     max-width: 90vw;
-    white-space: normal;
-    text-wrap: balance;
   }
 }
 
@@ -149,7 +146,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  color: var(--cream);
+  color: var(--warm-white);
 }
 
 .chip-circle {
@@ -159,7 +156,7 @@ body {
   width: 3rem;
   height: 3rem;
   border-radius: 999px;
-  background: oklch(93% 0.042 108 / 0.14);
+  background: oklch(94% 0.015 60 / 0.12);
   transition: background 0.3s var(--ease-out-quint), transform 0.45s var(--ease-out-expo);
 }
 
@@ -179,7 +176,7 @@ body {
 
 .chip:hover .chip-circle,
 .chip:focus-visible .chip-circle {
-  background: oklch(93% 0.042 108 / 0.26);
+  background: oklch(94% 0.015 60 / 0.24);
   transform: translateY(-3px);
 }
 
@@ -194,16 +191,16 @@ body {
   }
 
   .chip {
-    color: var(--sage);
+    color: var(--ink);
   }
 
   .chip-circle {
-    background: oklch(52% 0.035 150 / 0.14);
+    background: oklch(21% 0.035 270 / 0.1);
   }
 
   .chip:hover .chip-circle,
   .chip:focus-visible .chip-circle {
-    background: oklch(52% 0.035 150 / 0.24);
+    background: oklch(21% 0.035 270 / 0.2);
   }
 }
 
@@ -218,13 +215,13 @@ body {
 .split-base {
   position: absolute;
   inset: 0;
-  background: var(--navy);
+  background: var(--ink);
 }
 
 .split-panel {
   position: absolute;
   inset: 0;
-  background: var(--peach);
+  background: var(--flame);
 }
 
 /* ---------- Short landscape viewports ---------- */
@@ -243,7 +240,7 @@ body {
   }
 
   .role {
-    top: 66svh;
+    top: 60svh;
   }
 }
 
