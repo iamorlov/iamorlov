@@ -14,9 +14,9 @@ All tokens OKLCH, defined in `src/app/globals.scss`:
 | `--ink-deep` | `oklch(16.5% 0.03 270)` | Selection text |
 | `--teal` | `oklch(62% 0.1 195)` | Right/bottom panel, selection background |
 | `--warm-white` | `oklch(94% 0.015 60)` | VADYM fill, desktop chips, constellation |
-| `--warm-white-dim` | `oklch(78% 0.02 60)` | Role line |
+| `--warm-white-dim` | `oklch(78% 0.02 60)` | Reserved dim warm-white |
 
-The role line lives entirely on the ink panel and uses `--warm-white-dim`. **Never use `mix-blend-mode` for text over the split**: `.stage` has a z-index stacking context, so blends cannot see the fixed background behind it (this shipped broken once as white-on-light). Any text near the seam must be position-checked against the 5° diagonal, not the 50% line.
+The role line lives entirely on the teal panel and uses `--ink-deep`. **Never use `mix-blend-mode` for text over the split**: `.stage` has a z-index stacking context, so blends cannot see the fixed background behind it (this shipped broken once as white-on-light). Any text near the seam must be position-checked against the 5° diagonal, not the 50% line.
 
 ## Typography
 
@@ -28,15 +28,15 @@ Single family: **Gabarito** (variable, via next/font). User-chosen; DM Sans, Out
 
 ## Layout
 
-- Desktop: VADYM centered in left (ink) half and raised `clamp(2rem, 7vh, 5rem)`; ORLOV centered in right (teal) half and lowered the same amount (echoes the diagonal). Role line centered under VADYM at `left: 25%, top: 63svh`, max-width 44vw, always fully inside the ink half. Chips bottom-left half.
-- Mobile (<768px): panels split top/bottom; words centered in their halves with no offset; role line at `36.5svh`, fully inside the top (ink) half with margin against the tilted seam; chips full-width bottom over teal.
-- Short landscape (≥768px wide, ≤480px tall): smaller names, smaller offsets, role at `60svh` (collision-checked against VADYM above and chips below).
+- Desktop: VADYM centered in left (ink) half and raised `clamp(2rem, 7vh, 5rem)`; ORLOV centered in right (teal) half and lowered the same amount (echoes the diagonal). Role line centered under ORLOV at `left: 75%, top: 74svh`, max-width 44vw, in `--ink-deep`, always fully on the teal half (seam-checked). Chips bottom-left half.
+- Mobile (<768px): panels split top/bottom; words centered in their halves with no offset; role line at `57svh` in `--ink-deep`, fully inside the bottom (teal) half between the seam and ORLOV; chips full-width bottom over teal.
+- Short landscape (≥768px wide, ≤480px tall): smaller names, smaller offsets, role at `72svh` (collision-checked against ORLOV above and the viewport edge below).
 
 ## Motion
 
 Easings: expo-out `(0.16, 1, 0.3, 1)` everywhere. No springs, no bounce (original springs were refined away).
 
-Load: peach panel slides in from the right/bottom (1.1s, 0.15s delay); VADYM letters drop from above with blur (0.5s start, 0.05s stagger), ORLOV letters rise from below (0.75s start): the original's directional identity at letter granularity. Role line fades in with letter-spacing settling (1.5s). Chips rise last (1.9s+).
+Load: teal panel slides in from the right/bottom (1.1s, 0.15s delay); VADYM letters drop from above with blur (0.5s start, 0.05s stagger), ORLOV letters rise from below (0.75s start): the original's directional identity at letter granularity. Role line fades in with letter-spacing settling (1.5s). Chips rise last (1.9s+).
 
 Idle: two distinct effects on one canvas. Ink side: mouse-repelled constellation with connection lines (≤60 nodes). Teal side: soft pale embers rising with sine wobble, respawning at the bottom of their region (≤45). The two sides must never share the same effect.
 

@@ -103,8 +103,8 @@ body {
 
 .role {
   position: absolute;
-  left: 25%;
-  top: 63svh;
+  left: 75%;
+  top: 74svh;
   transform: translateX(-50%);
   margin: 0;
   max-width: 44vw;
@@ -114,13 +114,13 @@ body {
   text-transform: uppercase;
   text-align: center;
   text-wrap: balance;
-  color: var(--warm-white-dim);
+  color: var(--ink-deep);
 }
 
 @media (max-width: 767px) {
   .role {
     left: 50%;
-    top: 36.5svh;
+    top: 57svh;
     max-width: 90vw;
   }
 }
@@ -240,7 +240,7 @@ body {
   }
 
   .role {
-    top: 60svh;
+    top: 72svh;
   }
 }
 
