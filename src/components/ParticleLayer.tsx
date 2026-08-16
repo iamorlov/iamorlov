@@ -30,7 +30,7 @@ const ParticleLayer = () => {
   const animationRef = useRef<number | undefined>(undefined);
   const nodesRef = useRef<Node[]>([]);
   const embersRef = useRef<Ember[]>([]);
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const mouseRef = useRef({ x: -9999, y: -9999 });
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -51,22 +51,26 @@ const ParticleLayer = () => {
     const fadeInDuration = 1000;
     const startTime = Date.now() - (reduced ? fadeInDuration : 0);
 
+    // Logical (CSS px) size; the backing store is scaled by devicePixelRatio.
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+
     // Ink region = left half on desktop, top half on mobile.
     const isDesktop = () => window.innerWidth >= 768;
     const inInk = (x: number, y: number) =>
-      isDesktop() ? x < canvas.width * 0.5 : y < canvas.height * 0.5;
+      isDesktop() ? x < w * 0.5 : y < h * 0.5;
 
     const initParticles = () => {
       const nodes: Node[] = [];
       const embers: Ember[] = [];
-      const area = canvas.width * canvas.height;
+      const area = w * h;
       const nodeCount = Math.min(60, Math.floor(area / 22000));
       const emberCount = Math.min(45, Math.floor(area / 30000));
 
       let guard = 0;
       while (nodes.length < nodeCount && guard++ < 5000) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
+        const x = Math.random() * w;
+        const y = Math.random() * h;
         if (!inInk(x, y)) continue;
         nodes.push({
           x,
@@ -82,8 +86,8 @@ const ParticleLayer = () => {
 
       guard = 0;
       while (embers.length < emberCount && guard++ < 5000) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
+        const x = Math.random() * w;
+        const y = Math.random() * h;
         if (inInk(x, y)) continue;
         embers.push({
           x,
@@ -101,9 +105,17 @@ const ParticleLayer = () => {
     };
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = Math.ceil(w * dpr);
+      canvas.height = Math.ceil(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       initParticles();
+      if (reduced) {
+        // The loop is off under reduced motion; repaint the still frame.
+        requestAnimationFrame(animate);
+      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -115,7 +127,7 @@ const ParticleLayer = () => {
       const fadeInAlpha = Math.min(elapsed / fadeInDuration, 1);
       const t = elapsed / 1000;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, w, h);
 
       const mouse = mouseRef.current;
       const nodes = nodesRef.current;
@@ -173,13 +185,11 @@ const ParticleLayer = () => {
           ember.y -= ember.rise;
           ember.x += Math.sin(t * ember.wobble + ember.phase) * 0.25;
 
-          // Respawn at the bottom of the flame region when drifting out of it.
-          const outTop = isDesktop() ? ember.y < -6 : ember.y < canvas.height * 0.5 - 6;
+          // Respawn at the bottom of the rose region when drifting out of it.
+          const outTop = isDesktop() ? ember.y < -6 : ember.y < h * 0.5 - 6;
           if (outTop) {
-            ember.y = canvas.height + 6;
-            ember.x = isDesktop()
-              ? canvas.width * (0.5 + Math.random() * 0.5)
-              : Math.random() * canvas.width;
+            ember.y = h + 6;
+            ember.x = isDesktop() ? w * (0.5 + Math.random() * 0.5) : Math.random() * w;
           }
         }
 

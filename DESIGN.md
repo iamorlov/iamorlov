@@ -11,10 +11,10 @@ All tokens OKLCH, defined in `src/app/globals.scss`:
 | Token | Value | Role |
 |---|---|---|
 | `--indigo` | `oklch(37.5% 0.135 283)` | Left/top panel (#403D88), ORLOV fill, mobile chips, themeColor |
-| `--indigo-deep` | `oklch(30% 0.12 283)` | Role line, selection text |
+| `--indigo-deep` | `oklch(30% 0.12 283)` | Role line, selection background |
 | `--rose` | `oklch(82% 0.075 19)` | Right/bottom panel (#F8B2B2), VADYM fill, desktop chips |
-| `--rose-bright` | `oklch(88% 0.05 19)` | Body fallback text |
-| `--orchid` | `oklch(60% 0.1 338)` | Selection background, ember glow (#AF719D) |
+| `--rose-bright` | `oklch(88% 0.05 19)` | Body fallback text, selection text |
+| `--orchid` | `oklch(60% 0.1 338)` | Ember glow (#AF719D) |
 | `--plum` | `oklch(54% 0.085 316)` | Desktop chip hover fill (#8B639B) |
 
 Measured contrast: names 5.94:1 both directions, role 7.87:1, chip labels 5.94:1 at full opacity. **Chip labels stay at opacity 1**; opacity-based de-emphasis dropped them below AA once. **Never use `mix-blend-mode` for text over the split**: `.stage` has a z-index stacking context, so blends cannot see the fixed background behind it (this shipped broken once as white-on-light). Any text near the seam must be position-checked against the 5° diagonal, not the 50% line. Tailwind's `md` is pinned to 768px via `@theme` so it can never drift from the px SCSS queries at enlarged root font sizes.

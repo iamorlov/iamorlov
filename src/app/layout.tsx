@@ -10,8 +10,21 @@ const gabarito = Gabarito({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://iamorlov.com"),
   title: "Vadym Orlov",
   description: "Vadym Orlov. Software Engineer and Game Developer.",
+  openGraph: {
+    title: "Vadym Orlov",
+    description: "Software Engineer and Game Developer.",
+    url: "https://iamorlov.com",
+    siteName: "Vadym Orlov",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vadym Orlov",
+    description: "Software Engineer and Game Developer.",
+  },
 };
 
 export const viewport: Viewport = {
