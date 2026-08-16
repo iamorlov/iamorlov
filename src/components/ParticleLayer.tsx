@@ -34,7 +34,7 @@ const ParticleLayer = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 1400);
+    const timer = setTimeout(() => setIsVisible(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -146,7 +146,7 @@ const ParticleLayer = () => {
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
-        ctx.fillStyle = `oklch(94% 0.015 60 / ${alpha * 0.55})`;
+        ctx.fillStyle = `oklch(90% 0.05 19 / ${alpha * 0.55})`;
         ctx.fill();
       });
 
@@ -160,7 +160,7 @@ const ParticleLayer = () => {
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `oklch(94% 0.015 60 / ${alpha * 0.12})`;
+            ctx.strokeStyle = `oklch(90% 0.05 19 / ${alpha * 0.12})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -188,8 +188,8 @@ const ParticleLayer = () => {
           ember.x, ember.y, 0,
           ember.x, ember.y, ember.size * 2.2
         );
-        grad.addColorStop(0, `oklch(97% 0.02 200 / ${alpha})`);
-        grad.addColorStop(1, "oklch(97% 0.02 200 / 0)");
+        grad.addColorStop(0, `oklch(75% 0.09 338 / ${alpha})`);
+        grad.addColorStop(1, "oklch(75% 0.09 338 / 0)");
         ctx.beginPath();
         ctx.arc(ember.x, ember.y, ember.size * 2.2, 0, Math.PI * 2);
         ctx.fillStyle = grad;

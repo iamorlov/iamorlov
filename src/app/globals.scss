@@ -1,25 +1,32 @@
 @use "tailwindcss" as *;
 
+/* Keep Tailwind's md aligned with the px media queries below even when
+   the user enlarges the root font size (rem breakpoints drift, px don't). */
+@theme {
+  --breakpoint-md: 768px;
+}
+
 :root {
-  --ink: oklch(21% 0.035 270);
-  --ink-deep: oklch(16.5% 0.03 270);
-  --teal: oklch(62% 0.1 195);
-  --warm-white: oklch(94% 0.015 60);
-  --warm-white-dim: oklch(78% 0.02 60);
+  --indigo: oklch(37.5% 0.135 283);
+  --indigo-deep: oklch(30% 0.12 283);
+  --rose: oklch(82% 0.075 19);
+  --orchid: oklch(60% 0.1 338);
+  --plum: oklch(54% 0.085 316);
+  --rose-bright: oklch(88% 0.05 19);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
-  background: var(--ink);
+  background: var(--indigo);
   height: 100%;
   overscroll-behavior: none;
 }
 
 body {
-  background: var(--ink);
-  color: var(--warm-white);
+  background: var(--indigo);
+  color: var(--rose-bright);
   font-family: var(--font-gabarito), system-ui, sans-serif;
   height: 100dvh;
   overflow: hidden;
@@ -27,8 +34,8 @@ body {
 }
 
 ::selection {
-  background: var(--teal);
-  color: var(--ink-deep);
+  background: var(--orchid);
+  color: var(--indigo-deep);
 }
 
 :focus-visible {
@@ -70,12 +77,12 @@ body {
 }
 
 .name-word--vadym {
-  color: var(--warm-white);
+  color: var(--rose);
   transform: translateY(calc(-1 * clamp(2rem, 7vh, 5rem)));
 }
 
 .name-word--orlov {
-  color: var(--ink);
+  color: var(--indigo);
   transform: translateY(clamp(2rem, 7vh, 5rem));
 }
 
@@ -114,7 +121,7 @@ body {
   text-transform: uppercase;
   text-align: center;
   text-wrap: balance;
-  color: var(--ink-deep);
+  color: var(--indigo-deep);
 }
 
 @media (max-width: 767px) {
@@ -146,7 +153,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  color: var(--warm-white);
+  color: var(--rose);
 }
 
 .chip-circle {
@@ -156,7 +163,7 @@ body {
   width: 3rem;
   height: 3rem;
   border-radius: 999px;
-  background: oklch(94% 0.015 60 / 0.12);
+  background: oklch(82% 0.075 19 / 0.14);
   transition: background 0.3s var(--ease-out-quint), transform 0.45s var(--ease-out-expo);
 }
 
@@ -170,19 +177,12 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.75;
-  transition: opacity 0.3s var(--ease-out-quint);
 }
 
 .chip:hover .chip-circle,
 .chip:focus-visible .chip-circle {
-  background: oklch(94% 0.015 60 / 0.24);
+  background: oklch(54% 0.085 316 / 0.45);
   transform: translateY(-3px);
-}
-
-.chip:hover .chip-label,
-.chip:focus-visible .chip-label {
-  opacity: 1;
 }
 
 @media (max-width: 767px) {
@@ -191,16 +191,16 @@ body {
   }
 
   .chip {
-    color: var(--ink);
+    color: var(--indigo);
   }
 
   .chip-circle {
-    background: oklch(21% 0.035 270 / 0.1);
+    background: oklch(37.5% 0.135 283 / 0.12);
   }
 
   .chip:hover .chip-circle,
   .chip:focus-visible .chip-circle {
-    background: oklch(21% 0.035 270 / 0.2);
+    background: oklch(37.5% 0.135 283 / 0.22);
   }
 }
 
@@ -215,13 +215,13 @@ body {
 .split-base {
   position: absolute;
   inset: 0;
-  background: var(--ink);
+  background: var(--indigo);
 }
 
 .split-panel {
   position: absolute;
   inset: 0;
-  background: var(--teal);
+  background: var(--rose);
 }
 
 /* ---------- Short landscape viewports ---------- */
@@ -247,8 +247,7 @@ body {
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .chip-circle,
-  .chip-label {
+  .chip-circle {
     transition-duration: 0.01ms;
   }
 }

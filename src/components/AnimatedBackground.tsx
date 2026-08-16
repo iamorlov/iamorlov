@@ -36,7 +36,7 @@ const AnimatedBackground = () => {
         transition={
           reduced
             ? { duration: 0.4 }
-            : { duration: 1.1, ease: EXPO, delay: 0.15 }
+            : { duration: 0.9, ease: EXPO, delay: 0.1 }
         }
       />
 
@@ -53,7 +53,7 @@ const AnimatedBackground = () => {
         transition={
           reduced
             ? { duration: 0.4 }
-            : { duration: 1.1, ease: EXPO, delay: 0.15 }
+            : { duration: 0.9, ease: EXPO, delay: 0.1 }
         }
       />
 

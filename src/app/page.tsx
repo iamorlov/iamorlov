@@ -1,7 +1,9 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+
+const EMAIL = "contact@iamorlov.com";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -30,7 +32,7 @@ const Word: FC<{ text: string; from: -1 | 1; delay: number; reduced: boolean }> 
         transition={
           reduced
             ? { duration: 0.3, delay: 0.1 }
-            : { duration: 0.85, ease: EXPO, delay: delay + i * 0.05 }
+            : { duration: 0.7, ease: EXPO, delay: delay + i * 0.04 }
         }
       >
         {letter}
@@ -68,6 +70,15 @@ const links = [
 
 export default function Home() {
   const reduced = useReducedMotion() ?? false;
+  const [copied, setCopied] = useState(false);
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const copyEmail = () => {
+    navigator.clipboard?.writeText(EMAIL).catch(() => {});
+    setCopied(true);
+    clearTimeout(copyTimer.current);
+    copyTimer.current = setTimeout(() => setCopied(false), 1800);
+  };
 
   return (
     <div className="stage">
@@ -75,12 +86,12 @@ export default function Home() {
         <h1 className="names" aria-label="Vadym Orlov">
           <span className="name-half">
             <span className="name-word name-word--vadym">
-              <Word text="VADYM" from={-1} delay={0.5} reduced={reduced} />
+              <Word text="VADYM" from={-1} delay={0.35} reduced={reduced} />
             </span>
           </span>
           <span className="name-half">
             <span className="name-word name-word--orlov">
-              <Word text="ORLOV" from={1} delay={0.75} reduced={reduced} />
+              <Word text="ORLOV" from={1} delay={0.55} reduced={reduced} />
             </span>
           </span>
         </h1>
@@ -91,12 +102,12 @@ export default function Home() {
           animate={
             reduced
               ? { opacity: 1 }
-              : { opacity: 0.85, letterSpacing: "0.15em" }
+              : { opacity: 1, letterSpacing: "0.15em" }
           }
           transition={
             reduced
               ? { duration: 0.3, delay: 0.2 }
-              : { duration: 1, ease: EXPO, delay: 1.5 }
+              : { duration: 0.8, ease: EXPO, delay: 1.0 }
           }
         >
           Software Engineer and Game Developer
@@ -104,28 +115,43 @@ export default function Home() {
       </main>
 
       <footer className="links">
-        {links.map((link, i) => (
-          <motion.div
-            key={link.label}
-            initial={reduced ? { opacity: 0 } : { opacity: 0, y: 18 }}
-            animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={
-              reduced
-                ? { duration: 0.3, delay: 0.2 }
-                : { duration: 0.7, ease: EXPO, delay: 1.9 + i * 0.1 }
-            }
-          >
-            <a
-              className="chip"
-              href={link.href}
-              target={link.icon === "mail" ? undefined : "_blank"}
-              rel="noopener noreferrer"
+        {links.map((link, i) => {
+          const isMail = link.icon === "mail";
+          return (
+            <motion.div
+              key={link.label}
+              initial={
+                reduced
+                  ? { opacity: 0, visibility: "hidden" }
+                  : { opacity: 0, y: 18, visibility: "hidden" }
+              }
+              animate={
+                reduced
+                  ? { opacity: 1, visibility: "visible" }
+                  : { opacity: 1, y: 0, visibility: "visible" }
+              }
+              transition={
+                reduced
+                  ? { duration: 0.3, delay: 0.2 }
+                  : { duration: 0.6, ease: EXPO, delay: 1.25 + i * 0.08 }
+              }
             >
-              <span className="chip-circle">{icons[link.icon]}</span>
-              <span className="chip-label">{link.label}</span>
-            </a>
-          </motion.div>
-        ))}
+              <a
+                className="chip"
+                href={link.href}
+                target={isMail ? undefined : "_blank"}
+                rel={isMail ? undefined : "noopener noreferrer"}
+                aria-label={isMail ? `Email ${EMAIL} (copies address)` : link.label}
+                onClick={isMail ? copyEmail : undefined}
+              >
+                <span className="chip-circle">{icons[link.icon]}</span>
+                <span className="chip-label" aria-live={isMail ? "polite" : undefined}>
+                  {isMail && copied ? "Copied" : link.label}
+                </span>
+              </a>
+            </motion.div>
+          );
+        })}
       </footer>
     </div>
   );
