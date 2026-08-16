@@ -188,8 +188,8 @@ const ParticleLayer = () => {
           ember.x, ember.y, 0,
           ember.x, ember.y, ember.size * 2.2
         );
-        grad.addColorStop(0, `oklch(97% 0.03 60 / ${alpha})`);
-        grad.addColorStop(1, "oklch(97% 0.03 60 / 0)");
+        grad.addColorStop(0, `oklch(97% 0.02 200 / ${alpha})`);
+        grad.addColorStop(1, "oklch(97% 0.02 200 / 0)");
         ctx.beginPath();
         ctx.arc(ember.x, ember.y, ember.size * 2.2, 0, Math.PI * 2);
         ctx.fillStyle = grad;

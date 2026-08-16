@@ -2,7 +2,7 @@
 
 ## Theme
 
-Ink & Flame. The split identity in a modern duotone: deep ink blue-black panel against a vivid coral-flame panel, each with its own living background effect (constellation on ink, rising embers on flame). Energetic, warm, game-dev confident. Single screen (100dvh), no scrolling at any viewport.
+Ink & Verdigris. The split identity in a modern duotone: deep ink blue-black panel against a muted teal-verdigris panel, each with its own living background effect (constellation on ink, rising embers on teal). Energetic, warm, game-dev confident. Single screen (100dvh), no scrolling at any viewport.
 
 ## Color
 
@@ -12,7 +12,7 @@ All tokens OKLCH, defined in `src/app/globals.scss`:
 |---|---|---|
 | `--ink` | `oklch(21% 0.035 270)` | Left/top panel, ORLOV fill, mobile chips, themeColor |
 | `--ink-deep` | `oklch(16.5% 0.03 270)` | Selection text |
-| `--flame` | `oklch(63% 0.17 38)` | Right/bottom panel, selection background |
+| `--teal` | `oklch(62% 0.1 195)` | Right/bottom panel, selection background |
 | `--warm-white` | `oklch(94% 0.015 60)` | VADYM fill, desktop chips, constellation |
 | `--warm-white-dim` | `oklch(78% 0.02 60)` | Role line |
 
@@ -28,8 +28,8 @@ Single family: **Gabarito** (variable, via next/font). User-chosen; DM Sans, Out
 
 ## Layout
 
-- Desktop: VADYM centered in left (ink) half and raised `clamp(2rem, 7vh, 5rem)`; ORLOV centered in right (flame) half and lowered the same amount (echoes the diagonal). Role line centered under VADYM at `left: 25%, top: 63svh`, max-width 44vw, always fully inside the ink half. Chips bottom-left half.
-- Mobile (<768px): panels split top/bottom; words centered in their halves with no offset; role line at `36.5svh`, fully inside the top (ink) half with margin against the tilted seam; chips full-width bottom over flame.
+- Desktop: VADYM centered in left (ink) half and raised `clamp(2rem, 7vh, 5rem)`; ORLOV centered in right (teal) half and lowered the same amount (echoes the diagonal). Role line centered under VADYM at `left: 25%, top: 63svh`, max-width 44vw, always fully inside the ink half. Chips bottom-left half.
+- Mobile (<768px): panels split top/bottom; words centered in their halves with no offset; role line at `36.5svh`, fully inside the top (ink) half with margin against the tilted seam; chips full-width bottom over teal.
 - Short landscape (≥768px wide, ≤480px tall): smaller names, smaller offsets, role at `60svh` (collision-checked against VADYM above and chips below).
 
 ## Motion
@@ -38,15 +38,15 @@ Easings: expo-out `(0.16, 1, 0.3, 1)` everywhere. No springs, no bounce (origina
 
 Load: peach panel slides in from the right/bottom (1.1s, 0.15s delay); VADYM letters drop from above with blur (0.5s start, 0.05s stagger), ORLOV letters rise from below (0.75s start): the original's directional identity at letter granularity. Role line fades in with letter-spacing settling (1.5s). Chips rise last (1.9s+).
 
-Idle: two distinct effects on one canvas. Ink side: mouse-repelled constellation with connection lines (≤60 nodes). Flame side: soft warm embers rising with sine wobble, respawning at the bottom of their region (≤45). The two sides must never share the same effect.
+Idle: two distinct effects on one canvas. Ink side: mouse-repelled constellation with connection lines (≤60 nodes). Teal side: soft pale embers rising with sine wobble, respawning at the bottom of their region (≤45). The two sides must never share the same effect.
 
 `prefers-reduced-motion`: all entrances become fades; both particle effects render one static frame with no mouse tracking.
 
 ## Components
 
-- `AnimatedBackground` + `ClientBackground` (ssr:false wrapper): ink base + flame `clip-path` panel (diagonal at 5°) + `ParticleLayer`.
-- `ParticleLayer`: one canvas, two populations (nodes on ink, embers on flame), region split at the 50% line per breakpoint.
-- `.chip`: circular icon chip + label, tint from panel (warm-white on ink, ink on flame), lifts 3px on hover, ≥44px touch target.
+- `AnimatedBackground` + `ClientBackground` (ssr:false wrapper): ink base + teal `clip-path` panel (diagonal at 5°) + `ParticleLayer`.
+- `ParticleLayer`: one canvas, two populations (nodes on ink, embers on teal), region split at the 50% line per breakpoint.
+- `.chip`: circular icon chip + label, tint from panel (warm-white on ink, ink on teal), lifts 3px on hover, ≥44px touch target.
 
 ## Rules
 

@@ -3,7 +3,7 @@
 :root {
   --ink: oklch(21% 0.035 270);
   --ink-deep: oklch(16.5% 0.03 270);
-  --flame: oklch(63% 0.17 38);
+  --teal: oklch(62% 0.1 195);
   --warm-white: oklch(94% 0.015 60);
   --warm-white-dim: oklch(78% 0.02 60);
 
@@ -27,7 +27,7 @@ body {
 }
 
 ::selection {
-  background: var(--flame);
+  background: var(--teal);
   color: var(--ink-deep);
 }
 
@@ -62,7 +62,7 @@ body {
 
 .name-word {
   font-weight: 700;
-  font-size: min(clamp(4.25rem, 11.5vw, 13rem), 24svh);
+  font-size: min(clamp(4.75rem, 13.5vw, 15rem), 28svh);
   line-height: 1;
   letter-spacing: -0.015em;
   text-transform: uppercase;
@@ -90,7 +90,7 @@ body {
   }
 
   .name-word {
-    font-size: min(clamp(3.75rem, 19vw, 9rem), 18svh, 23vw);
+    font-size: min(clamp(4rem, 21vw, 10rem), 20svh, 25vw);
   }
 
   .name-word--vadym,
@@ -221,14 +221,14 @@ body {
 .split-panel {
   position: absolute;
   inset: 0;
-  background: var(--flame);
+  background: var(--teal);
 }
 
 /* ---------- Short landscape viewports ---------- */
 
 @media (max-height: 480px) and (min-width: 768px) {
   .name-word {
-    font-size: min(clamp(3.5rem, 10vw, 8rem), 20svh);
+    font-size: min(clamp(3.5rem, 11vw, 9rem), 22svh);
   }
 
   .name-word--vadym {
