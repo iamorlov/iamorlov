@@ -1,25 +1,21 @@
-import type { Metadata } from "next";
-import { DM_Sans, Outfit } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Gabarito } from "next/font/google";
 import "./globals.scss";
 import ClientBackground from "@/components/ClientBackground";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const gabarito = Gabarito({
+  variable: "--font-gabarito",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "500", "700", "900"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "500", "700", "900"],
 });
 
 export const metadata: Metadata = {
   title: "Vadym Orlov",
-  description: "Vadym Orlov | Official web site",
+  description: "Vadym Orlov. Software Engineer and Game Developer.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#384B70",
 };
 
 export default function RootLayout({
@@ -29,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${outfit.variable} antialiased`}>
+      <body className={`${gabarito.variable} antialiased`}>
         <ClientBackground />
         {children}
       </body>

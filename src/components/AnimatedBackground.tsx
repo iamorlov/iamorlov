@@ -1,87 +1,62 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import ParticleLayer from "./ParticleLayer";
 
+const EXPO = [0.16, 1, 0.3, 1] as const;
+
+// Diagonal split: navy base, warm panel slides in over the right
+// (desktop) or bottom (mobile) half.
 const AnimatedBackground = () => {
   const [isVisible, setIsVisible] = useState(false);
-  
+  const reduced = useReducedMotion() ?? false;
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
-    
+    const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  const angleOffset = Math.tan(-5 * Math.PI / 180) * 100;
+  const angle = Math.tan((5 * Math.PI) / 180) * 100;
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Left side - Desktop */}
+    <div className="split" aria-hidden="true">
+      <div className="split-base" />
+
+      {/* Desktop: right panel, diagonal seam */}
       <motion.div
-        className="absolute inset-0 hidden md:block"
+        className="split-panel hidden md:block"
         style={{
-          background: "#384B70"
+          clipPath: `polygon(${50 + angle / 2}% 0%, 100% 0%, 100% 100%, ${50 - angle / 2}% 100%)`,
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      />
-      
-      {/* Right side - Desktop */}
-      <motion.div
-        className="absolute inset-0 hidden md:block z-5"
-        style={{
-          background: "#F7E7DC",
-          clipPath: `polygon(${50 - angleOffset/2}% 0%, 100% 0%, 100% 100%, ${50 + angleOffset/2}% 100%)`,
-        }}
-        initial={{ x: "100%" }}
-        animate={{ x: isVisible ? "0%" : "100%" }}
-        transition={{ 
-          duration: 1.5, 
-          ease: [0.25, 0.1, 0.25, 1],
-          delay: 0.3
-        }}
+        initial={reduced ? { opacity: 0 } : { x: "100%" }}
+        animate={
+          isVisible ? (reduced ? { opacity: 1 } : { x: "0%" }) : undefined
+        }
+        transition={
+          reduced
+            ? { duration: 0.4 }
+            : { duration: 1.1, ease: EXPO, delay: 0.15 }
+        }
       />
 
-      {/* Top side - Mobile */}
+      {/* Mobile: bottom panel, diagonal seam */}
       <motion.div
-        className="absolute inset-0 md:hidden"
+        className="split-panel md:hidden"
         style={{
-          background: "#384B70"
+          clipPath: `polygon(0% ${50 + angle / 2}%, 100% ${50 - angle / 2}%, 100% 100%, 0% 100%)`,
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      />
-      
-      {/* Bottom side - Mobile */}
-      <motion.div
-        className="absolute inset-0 md:hidden z-5"
-        style={{
-          background: "#F7E7DC",
-          clipPath: "polygon(0% 52%, 100% 48%, 100% 100%, 0% 100%)",
-        }}
-        initial={{ y: "100%" }}
-        animate={{ y: isVisible ? "0%" : "100%" }}
-        transition={{ 
-          duration: 1.5, 
-          ease: [0.25, 0.1, 0.25, 1],
-          delay: 0.3
-        }}
+        initial={reduced ? { opacity: 0 } : { y: "100%" }}
+        animate={
+          isVisible ? (reduced ? { opacity: 1 } : { y: "0%" }) : undefined
+        }
+        transition={
+          reduced
+            ? { duration: 0.4 }
+            : { duration: 1.1, ease: EXPO, delay: 0.15 }
+        }
       />
 
-      {/* Subtle overlay for depth */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-transparent via-black/5 to-black/15"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
-        transition={{ duration: 1, delay: 1 }}
-      />
-
-      {/* Particle Layer */}
       <ParticleLayer />
     </div>
   );

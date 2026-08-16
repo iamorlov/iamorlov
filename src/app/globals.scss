@@ -1,79 +1,257 @@
 @use "tailwindcss" as *;
 
-$dark-bg: #0a0a0a;
-$light-bg: #ffffff;
-$dark-text: #171717;
-$light-text: #ededed;
-
-$purple-primary: oklch(70.2% 0.183 293.541);
-$purple-light: oklch(81.1% 0.111 293.571);
-$purple-medium: oklch(60.6% 0.25 292.717);
-
 :root {
-  --background: #{$light-bg};
-  --foreground: #{$dark-text};
+  --navy: oklch(38% 0.058 265);
+  --navy-deep: oklch(33% 0.06 265);
+  --cream: oklch(93% 0.042 108);
+  --peach: oklch(93.5% 0.028 70);
+  --sage: oklch(52% 0.035 150);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #{$dark-bg};
-    --foreground: #{$light-text};
-  }
+html {
+  background: var(--navy);
+  height: 100%;
+  overscroll-behavior: none;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--navy);
+  color: var(--cream);
+  font-family: var(--font-gabarito), system-ui, sans-serif;
+  height: 100dvh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--navy-deep);
+  color: var(--cream);
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+/* ---------- Stage ---------- */
+
+.stage {
   position: relative;
-  overflow-x: hidden;
+  z-index: 2;
+  height: 100dvh;
 }
 
-h1 {
-  width: 100%;
+/* ---------- Name panels ---------- */
+
+.names {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.name-half {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name-word {
   font-weight: 700;
-  letter-spacing: 0.015em;
-  padding: 0;
-  font-family: var(--font-dm-sans);
+  font-size: min(clamp(4.25rem, 11.5vw, 13rem), 24svh);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
-  span {
-    color: var(--white);
+.name-word--vadym {
+  color: var(--cream);
+  transform: translateY(calc(-1 * clamp(2rem, 7vh, 5rem)));
+}
+
+.name-word--orlov {
+  color: var(--navy);
+  transform: translateY(clamp(2rem, 7vh, 5rem));
+}
+
+.name-letter {
+  display: inline-block;
+  will-change: transform, filter;
+}
+
+@media (max-width: 767px) {
+  .names {
+    flex-direction: column;
+  }
+
+  .name-word {
+    font-size: min(clamp(3.75rem, 19vw, 9rem), 18svh, 23vw);
+  }
+
+  .name-word--vadym,
+  .name-word--orlov {
+    transform: none;
   }
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
+/* ---------- Role line (sits on the seam, inverts per panel) ---------- */
 
-  50% {
-    background-position: 100% 50%;
-  }
+.role {
+  position: absolute;
+  left: 50%;
+  top: 74svh;
+  transform: translateX(-50%);
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(0.85rem, 0.9vw + 0.5rem, 1.25rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  color: oklch(100% 0 0);
+  mix-blend-mode: difference;
+  opacity: 0.85;
+}
 
-  100% {
-    background-position: 0% 50%;
+@media (max-width: 767px) {
+  .role {
+    top: 50svh;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    white-space: normal;
+    text-wrap: balance;
   }
 }
 
-.title-font {
-  font-family: var(--font-dm-sans);
-  background: linear-gradient(to top, $purple-medium, $purple-primary, $purple-light);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: .025em;
-  animation: gradientShift 8s ease infinite;
+/* ---------- Links ---------- */
+
+.links {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.25rem, 3vh, 2.5rem) 1.5rem;
+  padding-bottom: max(env(safe-area-inset-bottom), clamp(1.25rem, 3vh, 2.5rem));
 }
 
-.links-text {
-  font-family: var(--font-outfit);
+.chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   text-decoration: none;
-  transition: all 0.3s ease-in-out;
+  color: var(--cream);
 }
 
-@media (max-width: 768px) {
-  .main-text {
-    text-align: center;
+.chip-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background: oklch(93% 0.042 108 / 0.14);
+  transition: background 0.3s var(--ease-out-quint), transform 0.45s var(--ease-out-expo);
+}
+
+.chip svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.chip-label {
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  transition: opacity 0.3s var(--ease-out-quint);
+}
+
+.chip:hover .chip-circle,
+.chip:focus-visible .chip-circle {
+  background: oklch(93% 0.042 108 / 0.26);
+  transform: translateY(-3px);
+}
+
+.chip:hover .chip-label,
+.chip:focus-visible .chip-label {
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .links {
+    width: 100%;
+  }
+
+  .chip {
+    color: var(--sage);
+  }
+
+  .chip-circle {
+    background: oklch(52% 0.035 150 / 0.14);
+  }
+
+  .chip:hover .chip-circle,
+  .chip:focus-visible .chip-circle {
+    background: oklch(52% 0.035 150 / 0.24);
+  }
+}
+
+/* ---------- Split background ---------- */
+
+.split {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.split-base {
+  position: absolute;
+  inset: 0;
+  background: var(--navy);
+}
+
+.split-panel {
+  position: absolute;
+  inset: 0;
+  background: var(--peach);
+}
+
+/* ---------- Short landscape viewports ---------- */
+
+@media (max-height: 480px) and (min-width: 768px) {
+  .name-word {
+    font-size: min(clamp(3.5rem, 10vw, 8rem), 20svh);
+  }
+
+  .name-word--vadym {
+    transform: translateY(calc(-1 * clamp(1rem, 5vh, 2.5rem)));
+  }
+
+  .name-word--orlov {
+    transform: translateY(clamp(1rem, 5vh, 2.5rem));
+  }
+
+  .role {
+    top: 66svh;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .chip-circle,
+  .chip-label {
+    transition-duration: 0.01ms;
   }
 }

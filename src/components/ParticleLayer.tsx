@@ -39,9 +39,11 @@ const ParticleLayer = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Start fade-in animation
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Start fade-in animation (skipped when reduced motion: draw one full-alpha frame)
     const fadeInDuration = 1000; // 1 second fade-in
-    const startTime = Date.now();
+    const startTime = Date.now() - (reduced ? fadeInDuration : 0);
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -51,7 +53,7 @@ const ParticleLayer = () => {
 
     const initParticles = () => {
       const particles: Particle[] = [];
-      const particleCount = Math.min(150, Math.floor((canvas.width * canvas.height) / 8000));
+      const particleCount = Math.min(120, Math.floor((canvas.width * canvas.height) / 11000));
 
       for (let i = 0; i < particleCount; i++) {
         const x = Math.random() * canvas.width;
@@ -204,13 +206,17 @@ const ParticleLayer = () => {
         });
       });
 
-      animationRef.current = requestAnimationFrame(animate);
+      if (!reduced) {
+        animationRef.current = requestAnimationFrame(animate);
+      }
     };
 
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
-    window.addEventListener("mousemove", handleMouseMove);
-    
+    if (!reduced) {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
