@@ -1,25 +1,10 @@
 import { ImageResponse } from "next/og";
+import { gabarito700, gabaritoFonts } from "./og-font";
 
 export const dynamic = "force-static";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "Vadym Orlov, Software Engineer and Game Developer";
-
-// Fetched once at build time (static export). Falls back to the default
-// font if the network is unavailable so the build never breaks.
-async function gabarito700(): Promise<ArrayBuffer | null> {
-  try {
-    const css = await fetch(
-      "https://fonts.googleapis.com/css2?family=Gabarito:wght@700",
-      { headers: { "User-Agent": "Mozilla/5.0 (Windows NT 6.1)" } }
-    ).then((r) => r.text());
-    const url = css.match(/src: url\((.+?)\)/)?.[1];
-    if (!url) return null;
-    return await fetch(url).then((r) => r.arrayBuffer());
-  } catch {
-    return null;
-  }
-}
 
 // Static share card mirroring the site's diagonal indigo/rose split.
 export default async function OpengraphImage() {
@@ -77,11 +62,6 @@ export default async function OpengraphImage() {
         </div>
       </div>
     ),
-    {
-      ...size,
-      fonts: font
-        ? [{ name: "Gabarito", data: font, weight: 700, style: "normal" }]
-        : undefined,
-    }
+    { ...size, fonts: gabaritoFonts(font) }
   );
 }
