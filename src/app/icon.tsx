@@ -1,11 +1,14 @@
 import { ImageResponse } from "next/og";
+import { gabarito700, gabaritoFonts } from "./og-font";
 
 export const dynamic = "force-static";
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
-// Favicon: nested V chevrons (rose over orchid) on indigo.
-export default function Icon() {
+// Favicon: round indigo disc, single rose V in the site's Gabarito 700.
+export default async function Icon() {
+  const font = await gabarito700();
+
   return new ImageResponse(
     (
       <div
@@ -13,30 +16,18 @@ export default function Icon() {
           width: "100%",
           height: "100%",
           display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           background: "#403D88",
-          borderRadius: 12,
+          borderRadius: "50%",
+          color: "#F8B2B2",
+          fontSize: 44,
+          fontWeight: 700,
         }}
       >
-        <svg width="64" height="64" viewBox="0 0 64 64">
-          <path
-            d="M 16 18 L 32 36 L 48 18"
-            stroke="#F8B2B2"
-            strokeWidth="9"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-          <path
-            d="M 16 34 L 32 52 L 48 34"
-            stroke="#AF719D"
-            strokeWidth="9"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-        </svg>
+        V
       </div>
     ),
-    size
+    { ...size, fonts: gabaritoFonts(font) }
   );
 }
