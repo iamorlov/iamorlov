@@ -19,11 +19,20 @@ export const metadata: Metadata = {
     url: "https://iamorlov.com",
     siteName: "Vadym Orlov",
     type: "website",
+    images: [
+      {
+        url: "/opengraph.png",
+        width: 1200,
+        height: 630,
+        alt: "Vadym Orlov, Software Engineer and Game Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Vadym Orlov",
     description: "Software Engineer and Game Developer.",
+    images: ["/opengraph.png"],
   },
 };
 
