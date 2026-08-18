@@ -1,14 +1,11 @@
 import { ImageResponse } from "next/og";
-import { gabarito700, gabaritoFonts } from "./og-font";
 
 export const dynamic = "force-static";
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
-// Favicon: the diagonal indigo/rose split with the V/O monogram.
-export default async function Icon() {
-  const font = await gabarito700();
-
+// Favicon: nested V chevrons (rose over orchid) on indigo.
+export default function Icon() {
   return new ImageResponse(
     (
       <div
@@ -16,36 +13,30 @@ export default async function Icon() {
           width: "100%",
           height: "100%",
           display: "flex",
-          background:
-            "linear-gradient(135deg, #403D88 0%, #403D88 49.5%, #F8B2B2 50.5%, #F8B2B2 100%)",
-          fontWeight: 700,
+          background: "#403D88",
           borderRadius: 12,
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: 2,
-            left: 7,
-            color: "#F8B2B2",
-            fontSize: 36,
-          }}
-        >
-          V
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            bottom: 2,
-            right: 7,
-            color: "#403D88",
-            fontSize: 36,
-          }}
-        >
-          O
-        </div>
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <path
+            d="M 16 18 L 32 36 L 48 18"
+            stroke="#F8B2B2"
+            strokeWidth="9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <path
+            d="M 16 34 L 32 52 L 48 34"
+            stroke="#AF719D"
+            strokeWidth="9"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </svg>
       </div>
     ),
-    { ...size, fonts: gabaritoFonts(font) }
+    size
   );
 }
