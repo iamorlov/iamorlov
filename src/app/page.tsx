@@ -110,7 +110,8 @@ export default function Home() {
               : { duration: 0.8, ease: EXPO, delay: 1.0 }
           }
         >
-          Software Engineer and Game Developer
+          <span className="role-line role-line--top">Software Engineer</span>{" "}
+          <span className="role-line role-line--bottom">and Game Developer</span>
         </motion.p>
       </main>
 

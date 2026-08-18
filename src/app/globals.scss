@@ -124,10 +124,26 @@ body {
 }
 
 @media (max-width: 767px) {
+  /* Ride the seam: same 8.75% offset the clip-path uses, so the
+     rotation matches the diagonal at every viewport. Fixed-angle
+     fallback first for browsers without CSS atan2(). */
   .role {
     left: 50%;
-    top: 57svh;
-    max-width: 90vw;
+    top: 50%;
+    max-width: none;
+    white-space: nowrap;
+    transform: translate(-50%, -50%) rotate(-10.5deg);
+    transform: translate(-50%, -50%) rotate(atan2(-8.75svh, 100vw));
+  }
+
+  .role-line {
+    display: block;
+    text-align: center;
+  }
+
+  .role-line--top {
+    color: oklch(98% 0.005 19);
+    margin-bottom: 1.15em;
   }
 }
 

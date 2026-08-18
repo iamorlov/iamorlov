@@ -30,7 +30,7 @@ Single family: **Gabarito** (variable, via next/font). User-chosen; DM Sans, Out
 ## Layout
 
 - Desktop: VADYM centered in left (indigo) half and raised `clamp(2rem, 7vh, 5rem)`; ORLOV centered in right (rose) half and lowered the same amount (echoes the diagonal). Role line centered under ORLOV at `left: 75%, top: 74svh`, max-width 44vw, in `--indigo-deep`, always fully on the rose half (seam-checked). Chips bottom-left half.
-- Mobile (<768px): panels split top/bottom; words centered in their halves with no offset; role line at `57svh` in `--indigo-deep`, fully inside the bottom (rose) half between the seam and ORLOV; chips full-width bottom over rose.
+- Mobile (<768px): panels split top/bottom; words centered in their halves with no offset; role line rides the seam: rotated to the exact diagonal via CSS `atan2(-8.75svh, 100vw)` (fixed -10.5deg fallback), centered on the 50% point, split into two lines - "Software Engineer" in near-white on the indigo half above, "and Game Developer" in `--indigo-deep` on the rose half below, each with a small gap off the line; chips full-width bottom over rose.
 - Short landscape (≥768px wide, ≤480px tall): smaller names, smaller offsets, role at `72svh` (collision-checked against ORLOV above and the viewport edge below).
 
 ## Motion
